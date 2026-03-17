@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aerial Insights LLC | Precision LiDAR & Photogrammetry Drone Inspections</title>
+  <meta name="description" content="Advanced aerial LiDAR and photogrammetry inspection services with RTK-corrected flights for construction and surveying professionals in New England." />
+  <link rel="icon" href="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0C0F14;
+      --bg-warm: #13161D;
+      --bg-card: #1A1E28;
+      --bg-light: #F5F0EB;
+      --bg-cream: #EDE7DF;
+      --orange: #E8632A;
+      --orange-light: #F47B3B;
+      --teal: #1B6B7D;
+      --teal-light: #4AACBC;
+      --sand: #D4B87A;
+      --sand-muted: #B8A068;
+      --white: #FAFAF8;
+      --text: #2A2A2A;
+      --text-mid: #5A5A5A;
+      --text-light: #8A8A8A;
+      --text-on-dark: rgba(250,250,248,0.7);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+    /* ═══ TOPO SVG PATTERN ═══ */
+    .topo-lines { position: absolute; inset: 0; pointer-events: none; opacity: 0.04; background-image: url("data:image/svg+xml,%3Csvg width='600' height='600' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 120 Q150 70 300 120 T600 100' fill='none' stroke='%23C4A060' stroke-width='1'/%3E%3Cpath d='M0 200 Q180 150 360 200 T600 180' fill='none' stroke='%23C4A060' stroke-width='0.9'/%3E%3Cpath d='M0 280 Q120 230 260 280 T520 260 T600 290' fill='none' stroke='%23C4A060' stroke-width='0.8'/%3E%3Cpath d='M0 360 Q160 310 320 360 T600 340' fill='none' stroke='%23C4A060' stroke-width='1'/%3E%3Cpath d='M0 440 Q130 390 270 440 T540 420 T600 450' fill='none' stroke='%23C4A060' stroke-width='0.7'/%3E%3Cpath d='M0 520 Q170 470 340 520 T600 500' fill='none' stroke='%23C4A060' stroke-width='0.9'/%3E%3C/svg%3E"); background-size: 600px 600px; }
+    .topo-lines.dark { opacity: 0.05; background-image: url("data:image/svg+xml,%3Csvg width='600' height='600' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 120 Q150 70 300 120 T600 100' fill='none' stroke='%23D4B87A' stroke-width='1.2'/%3E%3Cpath d='M0 200 Q180 150 360 200 T600 180' fill='none' stroke='%23D4B87A' stroke-width='1'/%3E%3Cpath d='M0 280 Q120 230 260 280 T520 260 T600 290' fill='none' stroke='%23D4B87A' stroke-width='0.9'/%3E%3Cpath d='M0 360 Q160 310 320 360 T600 340' fill='none' stroke='%23D4B87A' stroke-width='1.1'/%3E%3Cpath d='M0 440 Q130 390 270 440 T540 420 T600 450' fill='none' stroke='%23D4B87A' stroke-width='0.8'/%3E%3Cpath d='M0 520 Q170 470 340 520 T600 500' fill='none' stroke='%23D4B87A' stroke-width='1'/%3E%3C/svg%3E"); background-size: 600px 600px; }
+    .topo-rings { position: absolute; inset: 0; pointer-events: none; opacity: 0.05; background-image: url("data:image/svg+xml,%3Csvg width='500' height='500' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='180' cy='200' rx='150' ry='100' fill='none' stroke='%23C4A060' stroke-width='0.8'/%3E%3Cellipse cx='180' cy='200' rx='110' ry='72' fill='none' stroke='%23C4A060' stroke-width='0.9'/%3E%3Cellipse cx='180' cy='200' rx='70' ry='45' fill='none' stroke='%23C4A060' stroke-width='1'/%3E%3Cellipse cx='180' cy='200' rx='35' ry='22' fill='none' stroke='%23C4A060' stroke-width='1.1'/%3E%3Cellipse cx='400' cy='380' rx='90' ry='60' fill='none' stroke='%23C4A060' stroke-width='0.7'/%3E%3Cellipse cx='400' cy='380' rx='55' ry='35' fill='none' stroke='%23C4A060' stroke-width='0.8'/%3E%3Cellipse cx='400' cy='380' rx='22' ry='14' fill='none' stroke='%23C4A060' stroke-width='0.9'/%3E%3C/svg%3E"); background-size: 500px 500px; }
+
+    /* ═══ NAV ═══ */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 72px; display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(1.5rem, 4vw, 3rem); background: rgba(12,15,20,0.85); backdrop-filter: blur(20px) saturate(1.4); border-bottom: 1px solid rgba(255,255,255,0.04); transition: all 0.4s; }
+    nav.scrolled { background: rgba(12,15,20,0.96); box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
+    .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-brand svg { width: 32px; height: 32px; flex-shrink: 0; }
+    .nav-brand span { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--white); letter-spacing: 0.02em; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: rgba(250,250,248,0.55); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-cta { background: var(--orange) !important; color: var(--white) !important; padding: 9px 22px !important; border-radius: 6px; font-weight: 600 !important; transition: all 0.3s !important; }
+    .nav-cta:hover { background: var(--orange-light) !important; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(232,99,42,0.3); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: all 0.3s; }
+    .mobile-nav { display: none; position: fixed; top: 72px; left: 0; right: 0; background: rgba(12,15,20,0.98); backdrop-filter: blur(20px); padding: 1.5rem 2rem 2rem; flex-direction: column; gap: 0.5rem; z-index: 99; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { text-decoration: none; color: rgba(250,250,248,0.7); font-size: 1rem; font-weight: 500; padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); transition: color 0.2s; }
+    .mobile-nav a:hover { color: var(--orange); }
+
+    /* ═══ HERO ═══ */
+    #home { position: relative; min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; overflow: hidden; background: var(--bg); }
+    .hero-bg { position: absolute; inset: 0; background-image: url('https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/photo-1441974231531-c6227db76b6e.jfif'); background-size: cover; background-position: center; }
+    .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(175deg, rgba(12,15,20,0.35) 0%, rgba(12,15,20,0.55) 40%, rgba(12,15,20,0.92) 80%, var(--bg) 100%); }
+    .hero-content { position: relative; z-index: 2; text-align: center; padding: 8rem 2rem 4rem; max-width: 860px; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 10px; color: var(--orange); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 2rem; opacity: 0; animation: heroIn 0.8s 0.2s forwards; }
+    .hero-tag::before, .hero-tag::after { content: ''; width: 32px; height: 1px; background: var(--orange); opacity: 0.5; }
+    .hero-title { font-family: 'Outfit', sans-serif; font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 900; line-height: 1.02; color: var(--white); letter-spacing: -0.03em; margin-bottom: 1.5rem; opacity: 0; animation: heroIn 0.8s 0.35s forwards; }
+    .hero-title em { font-style: normal; color: var(--orange); }
+    .hero-sub { font-size: 1.05rem; color: var(--text-on-dark); font-weight: 400; max-width: 540px; margin: 0 auto 2.5rem; line-height: 1.8; opacity: 0; animation: heroIn 0.8s 0.5s forwards; }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; opacity: 0; animation: heroIn 0.8s 0.65s forwards; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 6px; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.02em; text-decoration: none; transition: all 0.3s; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; }
+    .btn-primary { background: var(--orange); color: var(--white); }
+    .btn-primary:hover { background: var(--orange-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,99,42,0.25); }
+    .btn-ghost { background: transparent; color: var(--white); border: 1px solid rgba(250,250,248,0.2); }
+    .btn-ghost:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+    .hero-img { margin-top: 3.5rem; opacity: 0; animation: heroIn 0.8s 0.8s forwards; }
+    .hero-img img { width: min(560px, 88vw); border-radius: 12px; border: 1px solid rgba(232,99,42,0.15); box-shadow: 0 40px 80px rgba(0,0,0,0.5); }
+    @keyframes heroIn { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(20px); } }
+
+    /* ═══ SCROLL REVEAL ═══ */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-left.visible { opacity: 1; transform: none; }
+    .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-right.visible { opacity: 1; transform: none; }
+
+    /* ═══ SECTIONS ═══ */
+    section { position: relative; overflow: hidden; }
+    .section-pad { padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 4vw, 3rem); }
+    .wrap { max-width: 1140px; margin: 0 auto; position: relative; }
+    .label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.75rem; }
+    .heading { font-family: 'Outfit', sans-serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .heading.light { color: var(--white); }
+    .subtext { font-size: 1rem; line-height: 1.8; color: var(--text-mid); max-width: 560px; }
+    .subtext.light { color: var(--text-on-dark); }
+
+    /* ═══ SERVICES ═══ */
+    #services { background: var(--bg-light); }
+    .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .svc-card { background: var(--white); border-radius: 12px; padding: 2.25rem 2rem; border: 1px solid rgba(0,0,0,0.05); transition: all 0.4s; }
+    .svc-card:hover { transform: translateY(-8px); box-shadow: 0 24px 48px rgba(0,0,0,0.08); border-color: var(--orange); }
+    .svc-num { font-family: 'Outfit', sans-serif; font-size: 3rem; font-weight: 900; color: var(--bg-cream); line-height: 1; margin-bottom: 1rem; }
+    .svc-card h3 { font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .svc-card p { font-size: 0.9rem; color: var(--text-mid); line-height: 1.7; margin-bottom: 1.25rem; }
+    .svc-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .svc-tag { font-size: 0.72rem; font-weight: 600; padding: 4px 12px; border-radius: 100px; background: #F0E8DE; color: var(--sand-muted); letter-spacing: 0.02em; }
+
+    /* ═══ APPLICATIONS ═══ */
+    #applications { background: var(--white); }
+    .app-row { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 5rem; }
+    .app-row:last-child { margin-bottom: 0; }
+    .app-row.flip .app-visual { order: -1; }
+    .app-visual img { width: 100%; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+    .app-row h3 { font-family: 'Outfit', sans-serif; font-size: 1.7rem; font-weight: 700; margin-bottom: 1.5rem; }
+    .app-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .app-list-item { display: flex; gap: 1rem; align-items: flex-start; }
+    .app-icon { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .app-icon.orange { background: var(--orange); }
+    .app-icon.teal { background: var(--teal); }
+    .app-icon svg { width: 16px; height: 16px; color: white; }
+    .app-list-item h4 { font-weight: 600; font-size: 0.95rem; margin-bottom: 2px; }
+    .app-list-item p { font-size: 0.85rem; color: var(--text-mid); line-height: 1.6; }
+
+    /* ═══ TECHNOLOGY ═══ */
+    #technology { background: var(--bg); color: var(--white); }
+    .tech-top { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-bottom: 4rem; }
+    .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .stat-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 1.5rem; text-align: center; transition: all 0.3s; }
+    .stat-box:hover { background: rgba(232,99,42,0.06); border-color: rgba(232,99,42,0.2); }
+    .stat-num { font-family: 'Outfit', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--orange); line-height: 1; }
+    .stat-num span { font-size: 0.9rem; }
+    .stat-lbl { font-size: 0.72rem; color: var(--text-on-dark); margin-top: 4px; font-weight: 500; letter-spacing: 0.03em; }
+    .spec-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; }
+    .spec-item { display: flex; gap: 12px; align-items: flex-start; padding: 1rem 1.25rem; border-radius: 8px; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.05); transition: all 0.3s; }
+    .spec-item:hover { border-color: rgba(232,99,42,0.2); background: rgba(232,99,42,0.04); }
+    .spec-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); flex-shrink: 0; margin-top: 5px; }
+    .spec-item strong { color: var(--white); font-size: 0.9rem; display: block; margin-bottom: 2px; font-weight: 600; }
+    .spec-item span { color: var(--text-on-dark); font-size: 0.82rem; line-height: 1.5; }
+
+    /* RTK */
+    .rtk-section { padding-top: 3.5rem; margin-top: 3.5rem; border-top: 1px solid rgba(255,255,255,0.06); }
+    .rtk-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: start; }
+    .rtk-text p { color: var(--text-on-dark); font-size: 0.93rem; line-height: 1.8; margin-bottom: 1.25rem; }
+    .rtk-benefit { display: flex; gap: 14px; align-items: flex-start; padding: 1rem 1.25rem; border-radius: 8px; background: rgba(232,99,42,0.04); border: 1px solid rgba(232,99,42,0.12); margin-bottom: 0.75rem; transition: all 0.3s; }
+    .rtk-benefit:hover { border-color: rgba(232,99,42,0.3); background: rgba(232,99,42,0.07); }
+    .rtk-benefit .spec-dot { background: var(--orange); }
+    .rtk-benefit strong { color: var(--orange-light); font-size: 0.88rem; display: block; margin-bottom: 2px; font-weight: 600; }
+    .rtk-benefit span { color: var(--text-on-dark); font-size: 0.82rem; line-height: 1.5; }
+
+    /* ═══ GALLERY ═══ */
+    #gallery { background: var(--bg-light); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 3rem; }
+    .g-item { border-radius: 12px; overflow: hidden; background: var(--white); box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: all 0.4s; }
+    .g-item:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
+    .g-item img { width: 100%; height: 220px; object-fit: cover; display: block; }
+    .g-cap { padding: 1rem 1.25rem; }
+    .g-cap h3 { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.95rem; margin-bottom: 3px; }
+    .g-cap p { font-size: 0.78rem; color: var(--text-mid); }
+
+    /* ═══ ABOUT ═══ */
+    #about { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 5rem; align-items: center; }
+    .about-text p { color: var(--text-mid); line-height: 1.85; margin-bottom: 1rem; font-size: 0.95rem; }
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.5rem; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; background: #FDF0E8; color: var(--orange); padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 600; }
+    .badge svg { width: 12px; height: 12px; }
+    .about-panel { background: linear-gradient(145deg, var(--bg) 0%, var(--teal) 100%); border-radius: 16px; padding: 2.5rem; position: relative; overflow: hidden; }
+    .about-panel .topo-lines { opacity: 0.06; }
+    .a-stat { text-align: center; padding: 1.5rem; position: relative; }
+    .a-stat .big { font-family: 'Outfit', sans-serif; font-size: 2.8rem; font-weight: 800; color: var(--orange); line-height: 1; }
+    .a-stat .lbl { font-size: 0.78rem; color: var(--text-on-dark); margin-top: 6px; font-weight: 500; }
+    .a-divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 0; }
+
+    /* ═══ CONTACT ═══ */
+    #contact { background: var(--bg-light); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; }
+    .cf { background: var(--white); border-radius: 12px; padding: 2.5rem; box-shadow: 0 4px 24px rgba(0,0,0,0.04); }
+    .cf h3 { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 1.75rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .fg { margin-bottom: 1rem; }
+    .fg label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .fg input, .fg select, .fg textarea { width: 100%; padding: 10px 14px; border: 1px solid #E0DCD6; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; color: var(--text); outline: none; transition: border-color 0.2s, box-shadow 0.2s; background: var(--white); }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(232,99,42,0.08); }
+    .fg textarea { resize: vertical; min-height: 100px; }
+    .ci { display: flex; flex-direction: column; gap: 1.25rem; }
+    .ci-card { background: var(--white); border-radius: 12px; padding: 2rem; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
+    .ci-card h3 { font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 1.25rem; }
+    .ci-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+    .ci-icon { width: 40px; height: 40px; background: var(--teal); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ci-icon svg { width: 18px; height: 18px; color: white; }
+    .ci-lbl { font-size: 0.72rem; color: var(--text-light); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .ci-val { font-size: 0.9rem; color: var(--text); font-weight: 500; }
+    .why-panel { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%); border-radius: 12px; padding: 2rem; }
+    .why-panel h3 { font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 700; color: white; margin-bottom: 1.1rem; }
+    .why-list { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+    .why-list li { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.92); font-size: 0.88rem; font-weight: 500; }
+    .why-list li::before { content: ''; width: 18px; height: 18px; background: rgba(255,255,255,0.2); border-radius: 50%; flex-shrink: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.5 11.5L3 8l1-1 2.5 2.5L11 5l1 1z'/%3E%3C/svg%3E"); background-position: center; background-repeat: no-repeat; background-size: 12px; }
+
+    /* ═══ FOOTER ═══ */
+    footer { background: var(--bg); color: var(--white); padding: 4.5rem clamp(1.5rem, 4vw, 3rem) 2rem; position: relative; overflow: hidden; }
+    .footer-grid { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; position: relative; }
+    .f-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
+    .f-brand svg { width: 28px; height: 28px; }
+    .f-brand span { font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 700; }
+    footer .desc { color: var(--text-on-dark); font-size: 0.85rem; line-height: 1.7; max-width: 320px; }
+    .f-col h4 { font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,250,248,0.4); margin-bottom: 1rem; }
+    .f-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .f-col a { color: var(--text-on-dark); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .f-col a:hover { color: var(--orange); }
+    .f-social { display: flex; gap: 0.6rem; margin-top: 1.25rem; }
+    .f-social a { width: 34px; height: 34px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+    .f-social a:hover { background: var(--orange); }
+    .f-social svg { width: 15px; height: 15px; color: var(--text-on-dark); }
+    .f-bottom { max-width: 1140px; margin: 3.5rem auto 0; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; font-size: 0.75rem; color: rgba(250,250,248,0.35); position: relative; flex-wrap: wrap; gap: 0.5rem; }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .svc-grid { grid-template-columns: 1fr; }
+      .app-row, .app-row.flip, .tech-top, .rtk-grid, .about-grid, .contact-grid, .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .app-row.flip .app-visual { order: 0; }
+      .stat-row { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .stat-row { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#home" class="nav-brand">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="6" cy="7" rx="5.5" ry="1.4" stroke="#E8632A" stroke-width="1.4" fill="none"/>
+      <ellipse cx="26" cy="7" rx="5.5" ry="1.4" stroke="#E8632A" stroke-width="1.4" fill="none"/>
+      <line x1="6" y1="8.4" x2="6" y2="10.5" stroke="#666" stroke-width="1.3"/>
+      <line x1="26" y1="8.4" x2="26" y2="10.5" stroke="#666" stroke-width="1.3"/>
+      <line x1="6" y1="10.5" x2="12.5" y2="13" stroke="#E8632A" stroke-width="1.8"/>
+      <line x1="26" y1="10.5" x2="19.5" y2="13" stroke="#E8632A" stroke-width="1.8"/>
+      <rect x="11.5" y="11.5" width="9" height="6" rx="2.5" fill="#E8632A"/>
+      <line x1="11.5" y1="17.5" x2="9" y2="21" stroke="#666" stroke-width="1.1"/>
+      <line x1="20.5" y1="17.5" x2="23" y2="21" stroke="#666" stroke-width="1.1"/>
+      <line x1="8" y1="21" x2="10" y2="21" stroke="#666" stroke-width="1.3"/>
+      <line x1="22" y1="21" x2="24" y2="21" stroke="#666" stroke-width="1.3"/>
+      <rect x="14" y="17.5" width="4" height="3" rx="1" fill="#444"/>
+      <circle cx="16" cy="19" r="1" fill="#222"/>
+      <path d="M12.5 23.5 Q16 26 19.5 23.5" stroke="#4AACBC" stroke-width="1.2" fill="none"/>
+      <path d="M11 26 Q16 29.5 21 26" stroke="#4AACBC" stroke-width="1" fill="none" opacity="0.6"/>
+    </svg>
+    <span>Aerial Insights LLC</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#applications">Applications</a></li>
+    <li><a href="#technology">Technology</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#home" onclick="closeMenu()">Home</a>
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#applications" onclick="closeMenu()">Applications</a>
+  <a href="#technology" onclick="closeMenu()">Technology</a>
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#contact" onclick="closeMenu()">Get a Quote</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">New England's Drone Inspection Specialists</div>
+    <h1 class="hero-title">Precision LiDAR &amp;<br><em>Photogrammetry Inspections</em></h1>
+    <p class="hero-sub">RTK-corrected drone surveys delivering sub-centimeter accuracy, fast turnaround, and CAD-ready deliverables for construction and surveying professionals.</p>
+    <div class="hero-btns">
+      <a href="#services" class="btn btn-primary">Our Services</a>
+      <a href="#contact" class="btn btn-ghost">Request a Quote</a>
+    </div>
+    <div class="hero-img">
+      <img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/PXL_20250528_213403577.MP.jpg" alt="DJI Matrice 300 RTK Drone with LiDAR" />
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="section-pad">
+  <div class="topo-lines"></div>
+  <div class="wrap">
+    <div class="label reveal">What We Offer</div>
+    <h2 class="heading reveal">Our Inspection Services</h2>
+    <p class="subtext reveal">Drone-based LiDAR and photogrammetry with RTK-corrected accuracy for construction and surveying professionals across New England.</p>
+    <div class="svc-grid">
+      <div class="svc-card reveal">
+        <div class="svc-num">01</div>
+        <h3>Topographic Mapping</h3>
+        <p>High-precision elevation data and contour mapping using RTK-corrected flights for construction planning and site analysis.</p>
+        <div class="svc-tags"><span class="svc-tag">RTK Accuracy</span><span class="svc-tag">DEMs</span><span class="svc-tag">CAD-Ready</span></div>
+      </div>
+      <div class="svc-card reveal">
+        <div class="svc-num">02</div>
+        <h3>Volumetric Analysis</h3>
+        <p>Accurate volume calculations for earthwork, stockpiles, and material management using RTK-corrected DEMs on active job sites.</p>
+        <div class="svc-tags"><span class="svc-tag">Cut/Fill</span><span class="svc-tag">Stockpiles</span><span class="svc-tag">Progress</span></div>
+      </div>
+      <div class="svc-card reveal">
+        <div class="svc-num">03</div>
+        <h3>As-Built Documentation</h3>
+        <p>Comprehensive documentation of completed structures and infrastructure for record-keeping and compliance verification.</p>
+        <div class="svc-tags"><span class="svc-tag">3D Point Clouds</span><span class="svc-tag">BIM</span><span class="svc-tag">QA</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATIONS -->
+<section id="applications" class="section-pad">
+  <div class="topo-lines"></div>
+  <div class="wrap">
+    <div class="label reveal">Industry Use Cases</div>
+    <h2 class="heading reveal">Industry Applications</h2>
+    <p class="subtext reveal" style="margin-bottom:3.5rem;">Our LiDAR and photogrammetry technology serves diverse construction and surveying needs across New England.</p>
+
+    <div class="app-row">
+      <div class="reveal-left">
+        <h3>Construction Industry</h3>
+        <div class="app-list">
+          <div class="app-list-item"><div class="app-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z"/><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5M4 15v-3a6 6 0 0 1 6-6M14 6a6 6 0 0 1 6 6v3"/></svg></div><div><h4>Site Preparation &amp; Planning</h4><p>Accurate terrain modeling for optimal construction planning and earthwork calculations.</p></div></div>
+          <div class="app-list-item"><div class="app-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div><div><h4>Progress Monitoring</h4><p>Track construction progress with regular scanning and volumetric analysis.</p></div></div>
+          <div class="app-list-item"><div class="app-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg></div><div><h4>Quality Control</h4><p>Verify construction accuracy against design specifications with precise measurements.</p></div></div>
+        </div>
+      </div>
+      <div class="app-visual reveal-right"><img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/DJI_20250528151303_0017_1750344619331.JPG" alt="Construction site aerial view" /></div>
+    </div>
+
+    <div class="app-row flip">
+      <div class="reveal-right">
+        <h3>Assisting Surveying Professionals</h3>
+        <div class="app-list">
+          <div class="app-list-item"><div class="app-icon teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/><circle cx="12" cy="12" r="10"/></svg></div><div><h4>Boundary Inspections</h4><p>High-precision property boundary determination for licensed surveyors.</p></div></div>
+          <div class="app-list-item"><div class="app-icon teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg></div><div><h4>Environmental Mapping</h4><p>Detailed topographic scanning for environmental impact assessments.</p></div></div>
+          <div class="app-list-item"><div class="app-icon teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg></div><div><h4>Infrastructure Planning</h4><p>Corridor scans for roads, utilities, and pipeline projects.</p></div></div>
+        </div>
+      </div>
+      <div class="app-visual reveal-left"><img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/DJI_20250528152825_0044_Zenmuse-L1-mission_1750344602055.JPG" alt="Survey aerial view" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNOLOGY -->
+<section id="technology" class="section-pad">
+  <div class="topo-lines dark"></div>
+  <div class="wrap">
+    <div class="label reveal" style="color:var(--orange-light);">Our Equipment</div>
+    <h2 class="heading light reveal">Advanced LiDAR &amp; Survey Technology</h2>
+    <p class="subtext light reveal" style="margin-bottom:2.5rem;">State-of-the-art equipment and real-time positioning delivering unmatched precision on every project.</p>
+
+    <div class="tech-top">
+      <div class="reveal-left">
+        <h3 style="font-family:'Outfit',sans-serif;font-size:1.3rem;font-weight:700;color:var(--white);margin-bottom:1rem;">Cutting-Edge Equipment</h3>
+        <div class="spec-list">
+          <div class="spec-item"><div class="spec-dot"></div><div><strong>High-Frequency Pulse Lasers</strong><span>Up to 2 million points per second</span></div></div>
+          <div class="spec-item"><div class="spec-dot"></div><div><strong>RTK/PPK GPS Integration</strong><span>Real-time centimeter-level positioning on every flight</span></div></div>
+          <div class="spec-item"><div class="spec-dot"></div><div><strong>IMU Stabilization</strong><span>Precise orientation tracking in flight</span></div></div>
+          <div class="spec-item"><div class="spec-dot"></div><div><strong>Multiple Return Capability</strong><span>Vegetation penetration for ground models</span></div></div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="stat-row">
+          <div class="stat-box"><div class="stat-num">2M<span>+</span></div><div class="stat-lbl">Points/Sec</div></div>
+          <div class="stat-box"><div class="stat-num">&lt;1<span>cm</span></div><div class="stat-lbl">Accuracy</div></div>
+          <div class="stat-box"><div class="stat-num">450<span>m</span></div><div class="stat-lbl">Max Range</div></div>
+          <div class="stat-box"><div class="stat-num">360<span>&deg;</span></div><div class="stat-lbl">FOV</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RTK -->
+    <div class="rtk-section">
+      <div class="rtk-grid">
+        <div class="rtk-text reveal-left">
+          <div class="label" style="color:var(--orange-light);">Precision Positioning</div>
+          <h3 style="font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:700;color:var(--white);margin-bottom:1rem;">RTK-Corrected Flights as Standard</h3>
+          <p>Every flight we operate uses Real-Time Kinematic (RTK) corrections &mdash; an advanced GNSS positioning technology that corrects satellite signal errors in real time during flight. Standard GPS can drift by several feet; RTK narrows that to 1&ndash;3 centimeters by comparing your drone's position against a ground-based reference station.</p>
+          <p>For surveyors and construction teams, this means every Digital Elevation Model, orthomosaic, and 3D point cloud we deliver is accurately georeferenced from the moment it's captured. We also run PPK (Post-Processed Kinematic) as a redundancy layer &mdash; if the live correction signal drops mid-flight, your data integrity is still preserved.</p>
+        </div>
+        <div class="reveal-right">
+          <h3 style="font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:700;color:var(--orange-light);margin-bottom:1rem;">How RTK Saves You Time &amp; Money</h3>
+          <div class="rtk-benefit"><div class="spec-dot"></div><div><strong>Faster Site Surveys</strong><span>Replace full days of manual ground surveying with 15&ndash;30 minute drone scans</span></div></div>
+          <div class="rtk-benefit"><div class="spec-dot"></div><div><strong>Accurate DEMs &amp; Volumes</strong><span>Reliable Digital Elevation Models for cut/fill, grading, and progress tracking</span></div></div>
+          <div class="rtk-benefit"><div class="spec-dot"></div><div><strong>Fewer Re-flights</strong><span>Accurate data the first time means fewer costly return trips</span></div></div>
+          <div class="rtk-benefit"><div class="spec-dot"></div><div><strong>CAD &amp; GIS Ready</strong><span>Georeferenced deliverables import directly into existing workflows</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="section-pad">
+  <div class="topo-lines"></div>
+  <div class="wrap">
+    <div class="label reveal">Our Work</div>
+    <h2 class="heading reveal">Equipment &amp; Projects</h2>
+    <p class="subtext reveal">Professional drone scanning from recent projects across New England.</p>
+    <div class="gallery-grid">
+      <div class="g-item reveal"><img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/PXL_20250528_213403577.MP_1750344609207.jpg" alt="DJI Matrice 300 RTK"/><div class="g-cap"><h3>DJI Matrice 300 RTK</h3><p>With Zenmuse L1 LiDAR payload</p></div></div>
+      <div class="g-item reveal"><img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/2025-05-30_12-29-15.jpg" alt="Construction survey"/><div class="g-cap"><h3>Construction Survey</h3><p>Active construction site mapping</p></div></div>
+      <div class="g-item reveal"><img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/2025-05-30_13-54-21.jpg" alt="Residential development"/><div class="g-cap"><h3>Residential Development</h3><p>Comprehensive aerial mapping</p></div></div>
+      <div class="g-item reveal"><img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/PXL_20251108_134530354_MP.jpg" alt="DJI RC Plus Controller"/><div class="g-cap"><h3>Flight Planning &amp; Execution</h3><p>DJI RC Plus with automated mission control</p></div></div>
+      <div class="g-item reveal"><img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/drone_flight.gif" alt="Drone in flight"/><div class="g-cap"><h3>Photogrammetry Survey in Progress</h3><p>Automated flight path execution</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section-pad">
+  <div class="topo-lines"></div>
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-text reveal-left">
+        <div class="label">Who We Are</div>
+        <h2 class="heading">About Aerial Insights LLC</h2>
+        <p>Founded in 2025, Aerial Insights LLC provides precision LiDAR and photogrammetry drone inspection services across New England. Our team combines deep expertise with cutting-edge aerial technology to deliver unparalleled accuracy and efficiency.</p>
+        <p>We serve construction companies, surveying firms, engineering consultants, and real estate agencies. Our commitment to accuracy, safety, and innovation makes us the trusted partner for projects ranging from small residential developments to major infrastructure initiatives.</p>
+        <div class="badges">
+          <span class="badge"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M6.5 11.5L3 8l1-1 2.5 2.5L11 5l1 1z"/></svg> Licensed &amp; Insured</span>
+          <span class="badge"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M6.5 11.5L3 8l1-1 2.5 2.5L11 5l1 1z"/></svg> FAA Part 107</span>
+          <span class="badge"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M6.5 11.5L3 8l1-1 2.5 2.5L11 5l1 1z"/></svg> RTK-Corrected</span>
+          <span class="badge"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M6.5 11.5L3 8l1-1 2.5 2.5L11 5l1 1z"/></svg> Fast Turnaround</span>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="about-panel">
+          <div class="topo-lines dark"></div>
+          <div class="a-stat"><div class="big">&lt;1cm</div><div class="lbl">RTK Survey Accuracy</div></div>
+          <hr class="a-divider"/>
+          <div class="a-stat"><div class="big">48hr</div><div class="lbl">Typical Turnaround</div></div>
+          <hr class="a-divider"/>
+          <div class="a-stat"><div class="big">NE</div><div class="lbl">New England Service Area</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section-pad">
+  <div class="topo-rings"></div>
+  <div class="wrap">
+    <div class="label reveal">Get Started</div>
+    <h2 class="heading reveal">Get Your Project Started</h2>
+    <p class="subtext reveal">Contact us for a consultation and detailed project quote.</p>
+    <div class="contact-grid">
+      <div class="cf reveal-left">
+        <h3>Request a Quote</h3>
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="fg"><label>First Name *</label><input type="text" placeholder="John" required/></div>
+            <div class="fg"><label>Last Name *</label><input type="text" placeholder="Smith" required/></div>
+          </div>
+          <div class="fg"><label>Company</label><input type="text" placeholder="Your Company Name"/></div>
+          <div class="form-row">
+            <div class="fg"><label>Email *</label><input type="email" placeholder="john@company.com" required/></div>
+            <div class="fg"><label>Phone</label><input type="tel" placeholder="(555) 123-4567"/></div>
+          </div>
+          <div class="fg"><label>Project Type</label><select><option value="">Select Project Type</option><option>Topographic Survey</option><option>Volumetric Analysis</option><option>As-Built Documentation</option><option>Boundary Survey</option><option>Progress Monitoring</option><option>Other</option></select></div>
+          <div class="fg"><label>Project Description</label><textarea placeholder="Tell us about your project requirements, location, and timeline..." rows="4"></textarea></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Submit Request</button>
+        </form>
+      </div>
+      <div class="ci reveal-right">
+        <div class="ci-card">
+          <h3>Contact Information</h3>
+          <div class="ci-row"><div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.9 12.85 19.79 19.79 0 0 1 1.83 4.18 2 2 0 0 1 3.82 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><div class="ci-lbl">Phone</div><div class="ci-val">(603) 860-3890</div></div></div>
+          <div class="ci-row"><div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div><div><div class="ci-lbl">Email</div><div class="ci-val">info@aerialinsightsllc.net</div></div></div>
+          <div class="ci-row"><div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="ci-lbl">Service Area</div><div class="ci-val">New England Region</div></div></div>
+        </div>
+        <div class="why-panel">
+          <h3>Why Choose Us?</h3>
+          <ul class="why-list">
+            <li>Licensed &amp; Insured Professionals</li>
+            <li>RTK-Corrected Every Flight</li>
+            <li>Fast Turnaround Times</li>
+            <li>Competitive Pricing</li>
+            <li>CAD-Ready Deliverables</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="topo-lines dark"></div>
+  <div class="footer-grid">
+    <div>
+      <div class="f-brand">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="6" cy="7" rx="5.5" ry="1.4" stroke="#E8632A" stroke-width="1.4" fill="none"/>
+          <ellipse cx="26" cy="7" rx="5.5" ry="1.4" stroke="#E8632A" stroke-width="1.4" fill="none"/>
+          <line x1="6" y1="8.4" x2="6" y2="10.5" stroke="#888" stroke-width="1.3"/>
+          <line x1="26" y1="8.4" x2="26" y2="10.5" stroke="#888" stroke-width="1.3"/>
+          <line x1="6" y1="10.5" x2="12.5" y2="13" stroke="#E8632A" stroke-width="1.8"/>
+          <line x1="26" y1="10.5" x2="19.5" y2="13" stroke="#E8632A" stroke-width="1.8"/>
+          <rect x="11.5" y="11.5" width="9" height="6" rx="2.5" fill="#E8632A"/>
+          <rect x="14" y="17.5" width="4" height="3" rx="1" fill="#666"/>
+          <path d="M12.5 23.5 Q16 26 19.5 23.5" stroke="#4AACBC" stroke-width="1.2" fill="none"/>
+          <path d="M11 26 Q16 29.5 21 26" stroke="#4AACBC" stroke-width="1" fill="none" opacity="0.6"/>
+        </svg>
+        <span>Aerial Insights LLC</span>
+      </div>
+      <p class="desc">Precision LiDAR and photogrammetry drone inspections with RTK-corrected flights for construction and surveying professionals across New England.</p>
+      <div class="f-social">
+        <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+      </div>
+    </div>
+    <div class="f-col"><h4>Services</h4><ul><li><a href="#services">Topographic Mapping</a></li><li><a href="#services">Volumetric Analysis</a></li><li><a href="#services">As-Built Documentation</a></li><li><a href="#services">Progress Monitoring</a></li></ul></div>
+    <div class="f-col"><h4>Company</h4><ul><li><a href="#about">About Us</a></li><li><a href="#technology">Technology</a></li><li><a href="#gallery">Projects</a></li><li><a href="#contact">Contact</a></li></ul></div>
+  </div>
+  <div class="f-bottom">
+    <span>&copy; 2025 Aerial Insights LLC. All rights reserved.</span>
+    <span>Licensed Professionals &middot; New England</span>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Mobile menu
+  function toggleMenu() { document.getElementById('mobileNav').classList.toggle('open'); }
+  function closeMenu() { document.getElementById('mobileNav').classList.remove('open'); }
+
+  // Scroll reveal
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        revealObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObs.observe(el));
+
+  // Form
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    const orig = btn.textContent;
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+    setTimeout(() => {
+      btn.textContent = 'Request Submitted!';
+      btn.style.background = '#22c55e';
+      btn.style.opacity = '1';
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.style.background = '';
+        btn.disabled = false;
+        e.target.reset();
+      }, 2500);
+    }, 1200);
+  }
+</script>
+</body>
+</html>
