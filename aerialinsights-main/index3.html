@@ -3,287 +3,644 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aerial Insights LLC | LiDAR &amp; Photogrammetry Drone Surveys — New England</title>
-  <meta name="description" content="Survey-grade LiDAR and photogrammetry for construction firms and surveying professionals across New England. DJI Matrice 300 RTK + M4E. 48-hour turnaround." />
+  <title>Aerial Insights LLC | Precision LiDAR Drone Surveying — New England</title>
+  <meta name="description" content="Survey-grade LiDAR and photogrammetry drone services for construction and surveying professionals across New England. RTK-corrected, same-day deliverables." />
   <link rel="icon" href="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/favicon.ico" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --navy: #0a1628;
-      --navy-mid: #0f2040;
-      --navy-light: #1a3a6b;
-      --blue: #1e7fd4;
-      --blue-bright: #2fa8ff;
-      --sky: #00c8ff;
-      --orange: #E8632A;
-      --orange-bright: #F47B3B;
-      --teal: #1B6B7D;
-      --teal-light: #4AACBC;
-      --sand: #D4B87A;
-      --white: #f8faff;
-      --gray: #8899bb;
-      --gray-light: #dde6f5;
+      --bg:      #0a0a0b;
+      --bg2:     #111113;
+      --bg3:     #18181b;
+      --lime:    #bad429;
+      --lime-d:  #96aa1f;
+      --white:   #f0f0f0;
+      --muted:   #888;
+      --dim:     rgba(240,240,240,0.55);
+      --border:  rgba(255,255,255,0.07);
+      --card:    #141416;
     }
+
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--navy); overflow-x: hidden; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
 
     /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 0 2rem; height: 64px;
+      height: 60px; padding: 0 2.5rem;
       display: flex; align-items: center; justify-content: space-between;
-      background: rgba(10,22,40,0.92); backdrop-filter: blur(12px);
-      transition: background 0.3s, box-shadow 0.3s;
+      background: transparent;
+      transition: background 0.3s, border-bottom 0.3s;
     }
-    nav.scrolled { background: rgba(10,22,40,0.97); box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-logo svg { width: 28px; height: 28px; color: var(--orange); }
-    .nav-logo-text { font-family: 'Barlow Condensed', sans-serif; font-size: 1.2rem; font-weight: 700; letter-spacing: 0.05em; color: var(--white); }
-    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
-    .nav-links a { text-decoration: none; color: rgba(248,250,255,0.75); font-size: 0.9rem; font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--orange); }
-    .nav-cta { background: var(--orange) !important; color: var(--white) !important; padding: 8px 20px !important; border-radius: 4px; }
-    .nav-cta:hover { background: var(--orange-bright) !important; }
+    nav.scrolled {
+      background: rgba(10,10,11,0.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo-dot {
+      width: 8px; height: 8px;
+      background: var(--lime); border-radius: 50%;
+      display: inline-block;
+    }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--muted);
+      font-size: 0.8rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--lime) !important;
+      color: var(--bg) !important;
+      padding: 7px 18px !important;
+      border-radius: 2px;
+      font-weight: 700 !important;
+    }
+    .nav-cta:hover { background: var(--lime-d) !important; color: var(--bg) !important; }
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; }
-    .mobile-nav { display: none; position: fixed; top: 64px; left: 0; right: 0; background: rgba(10,22,40,0.98); backdrop-filter: blur(12px); padding: 1.5rem 2rem; flex-direction: column; gap: 1rem; z-index: 99; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; }
+    .mobile-nav {
+      display: none; position: fixed; top: 60px; left: 0; right: 0;
+      background: rgba(10,10,11,0.98); backdrop-filter: blur(12px);
+      padding: 1.5rem 2rem; flex-direction: column; gap: 1rem; z-index: 99;
+      border-bottom: 1px solid var(--border);
+    }
     .mobile-nav.open { display: flex; }
-    .mobile-nav a { text-decoration: none; color: rgba(248,250,255,0.85); font-size: 1rem; font-weight: 500; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .mobile-nav a {
+      text-decoration: none; color: var(--dim);
+      font-size: 0.95rem; font-weight: 500;
+      padding: 0.6rem 0; border-bottom: 1px solid var(--border);
+      letter-spacing: 0.05em;
+    }
 
     /* HERO */
-    #home { position: relative; min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; overflow: hidden; padding: 0; }
-    .hero-bg { position: absolute; inset: 0; background-image: url('https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/photo-1441974231531-c6227db76b6e.jfif'); background-size: cover; background-position: center top; background-repeat: no-repeat; }
-    .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(4,13,28,0.55) 0%, rgba(10,22,40,0.65) 50%, rgba(10,22,40,0.9) 100%); }
-    .hero-grid { position: absolute; inset: 0; z-index: 1; opacity: 0.06; background-image: 
-      url("data:image/svg+xml,%3Csvg width='400' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 200 Q100 150 200 200 T400 200' fill='none' stroke='%23D4B87A' stroke-width='1'/%3E%3Cpath d='M0 180 Q120 130 200 180 T400 180' fill='none' stroke='%23D4B87A' stroke-width='0.8'/%3E%3Cpath d='M0 220 Q80 170 200 220 T400 220' fill='none' stroke='%23D4B87A' stroke-width='0.8'/%3E%3Cpath d='M0 160 Q140 110 200 160 T400 160' fill='none' stroke='%23D4B87A' stroke-width='0.6'/%3E%3Cpath d='M0 240 Q60 190 200 240 T400 240' fill='none' stroke='%23D4B87A' stroke-width='0.6'/%3E%3Cpath d='M0 100 Q150 60 200 100 T400 100' fill='none' stroke='%23D4B87A' stroke-width='0.5'/%3E%3Cpath d='M0 300 Q50 260 200 300 T400 300' fill='none' stroke='%23D4B87A' stroke-width='0.5'/%3E%3C/svg%3E");
-      background-size: 400px 400px; }
-    .hero-glow { position: absolute; top: 20%; left: 50%; transform: translateX(-50%); width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(232,99,42,0.12) 0%, transparent 70%); pointer-events: none; z-index: 1; }
-    .hero-content { position: relative; z-index: 2; text-align: center; padding: 5rem 2rem 4rem; max-width: 920px; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(232,99,42,0.12); border: 1px solid rgba(232,99,42,0.35); color: var(--orange-bright); padding: 6px 16px; border-radius: 100px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; }
-    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--orange); animation: blink 2s infinite; }
-    @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.5)} }
-    .hero-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(3rem, 8vw, 6rem); font-weight: 800; line-height: 0.95; color: var(--white); letter-spacing: -0.02em; margin-bottom: 0.5rem; }
-    .hero-title .accent { color: var(--orange); }
-    .hero-sub { font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(248,250,255,0.6); font-weight: 300; max-width: 580px; margin: 1rem auto 2.5rem; line-height: 1.7; }
-    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3.5rem; }
-    .btn { display: inline-block; padding: 13px 30px; border-radius: 4px; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.02em; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; font-family: 'Barlow', sans-serif; }
-    .btn-primary { background: var(--orange); color: var(--white); }
-    .btn-primary:hover { background: var(--orange-bright); transform: translateY(-2px); }
-    .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(248,250,255,0.3); }
-    .btn-outline:hover { border-color: var(--orange); color: var(--orange-bright); transform: translateY(-2px); }
-    .hero-img-wrap { position: relative; display: inline-block; }
-    .hero-img-wrap img { width: min(520px, 90vw); border-radius: 8px; border: 2px solid rgba(232,99,42,0.3); box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 40px rgba(232,99,42,0.1); }
-    .hero-chip { position: absolute; bottom: -18px; left: -24px; background: var(--navy-mid); border: 1px solid rgba(232,99,42,0.3); padding: 10px 18px; border-radius: 6px; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
-    .hero-chip .num { font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--orange); line-height: 1; }
-    .hero-chip .lbl { font-size: 0.72rem; color: var(--gray); font-weight: 600; margin-top: 2px; }
+    #home {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-left {
+      padding: 9rem 3rem 6rem 5vw;
+      position: relative; z-index: 2;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--lime); margin-bottom: 2rem;
+    }
+    .hero-tag::before {
+      content: ''; width: 28px; height: 1px; background: var(--lime);
+    }
+    h1.hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 8vw, 7.5rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      margin-bottom: 1.75rem;
+    }
+    h1.hero-title .lime { color: var(--lime); }
+    .hero-desc {
+      font-size: 1rem; color: var(--dim);
+      max-width: 440px; line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: 13px 28px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s;
+      cursor: pointer; border: none;
+    }
+    .btn-lime {
+      background: var(--lime); color: var(--bg);
+    }
+    .btn-lime:hover { background: var(--lime-d); transform: translateY(-2px); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .btn-ghost:hover { border-color: var(--lime); color: var(--lime); transform: translateY(-2px); }
 
-    /* SECTIONS */
-    section { padding: 6rem 2rem; }
-    .container { max-width: 1100px; margin: 0 auto; position: relative; }
-    .sec-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.6rem; }
-    .sec-label.light { color: var(--orange-bright); }
-    .sec-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; color: var(--navy); line-height: 1.1; margin-bottom: 0.75rem; }
-    .sec-title.light { color: var(--white); }
-    .sec-desc { font-size: 1rem; color: #4a5a7a; line-height: 1.75; max-width: 580px; margin-bottom: 3rem; }
-    .sec-desc.light { color: rgba(248,250,255,0.6); }
+    .hero-right {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .hero-right img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: brightness(0.75) contrast(1.05);
+    }
+    .hero-right::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to right, var(--bg) 0%, transparent 25%),
+                  linear-gradient(to top, var(--bg) 0%, transparent 20%);
+    }
+    .hero-right::after {
+      content: '';
+      position: absolute; left: 0; top: 8%; bottom: 8%;
+      width: 3px;
+      background: var(--lime);
+      z-index: 2;
+    }
+    .hero-badge {
+      position: absolute; bottom: 2.5rem; left: 2rem; z-index: 3;
+      background: rgba(10,10,11,0.85);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--lime);
+      padding: 1rem 1.5rem;
+      backdrop-filter: blur(8px);
+    }
+    .hero-badge .hb-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem; color: var(--lime); line-height: 1;
+    }
+    .hero-badge .hb-lbl {
+      font-size: 0.72rem; color: var(--muted);
+      font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-top: 3px;
+    }
+
+    /* STATS BAR */
+    #stats {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 0;
+    }
+    .stats-row {
+      max-width: 1200px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .stat-item {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.2rem; color: var(--lime);
+      line-height: 1; letter-spacing: 0.02em;
+    }
+    .stat-label {
+      font-size: 0.78rem; color: var(--muted);
+      font-weight: 500; letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* SHARED SECTION */
+    section { padding: 7rem 2rem; }
+    .container { max-width: 1200px; margin: 0 auto; position: relative; }
+    .sec-eyebrow {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--lime); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .sec-eyebrow::after { content: ''; flex: 0 0 28px; height: 1px; background: var(--lime); }
+    h2.sec-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      line-height: 0.95; letter-spacing: 0.02em;
+      color: var(--white); margin-bottom: 1.25rem;
+    }
+    .sec-desc {
+      font-size: 1rem; color: var(--dim);
+      line-height: 1.75; max-width: 540px;
+    }
 
     /* SERVICES */
-    #services { background: #eef3fa; position: relative; }
-    #services::before { content: ''; position: absolute; inset: 0; opacity: 0.05; background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 60 Q80 20 180 60 T400 50' fill='none' stroke='%23C4A060' stroke-width='1'/%3E%3Cpath d='M0 110 Q100 70 200 110 T400 100' fill='none' stroke='%23C4A060' stroke-width='0.9'/%3E%3Cpath d='M0 160 Q60 120 160 160 T340 140 T400 170' fill='none' stroke='%23C4A060' stroke-width='0.8'/%3E%3Cpath d='M0 210 Q120 170 220 210 T400 200' fill='none' stroke='%23C4A060' stroke-width='1'/%3E%3Cpath d='M0 260 Q80 220 180 260 T380 240 T400 270' fill='none' stroke='%23C4A060' stroke-width='0.8'/%3E%3Cpath d='M0 310 Q110 270 200 310 T400 290' fill='none' stroke='%23C4A060' stroke-width='0.9'/%3E%3Cpath d='M0 360 Q70 320 160 360 T340 340 T400 370' fill='none' stroke='%23C4A060' stroke-width='0.7'/%3E%3C/svg%3E"); background-size: 400px 400px; pointer-events: none; }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; position: relative; }
-    .svc-card { background: var(--white); border-radius: 8px; padding: 2rem; border: 1px solid #dde6f5; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; }
-    .svc-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(10,22,40,0.12); border-color: var(--orange); }
-    .svc-icon { width: 48px; height: 48px; border-radius: 8px; background: var(--teal); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; }
-    .svc-icon.orange { background: var(--orange); }
-    .svc-icon svg { width: 24px; height: 24px; color: white; }
-    .svc-card h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--navy); margin-bottom: 0.6rem; }
-    .svc-card p { color: #4a5a7a; line-height: 1.65; font-size: 0.93rem; margin-bottom: 1rem; }
-    .svc-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
-    .svc-list li { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; color: #4a5a7a; }
-    .svc-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
-
-    /* APPLICATIONS */
-    #applications { background: var(--white); position: relative; overflow: hidden; }
-    #applications::before { content: ''; position: absolute; inset: 0; opacity: 0.04; background-image: url("data:image/svg+xml,%3Csvg width='500' height='500' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 80 Q60 40 130 80 T260 70 T500 90' fill='none' stroke='%23C4A060' stroke-width='0.9'/%3E%3Cpath d='M0 140 Q90 100 180 140 T360 120 T500 150' fill='none' stroke='%23C4A060' stroke-width='0.8'/%3E%3Cpath d='M0 200 Q110 160 200 200 T400 180 T500 210' fill='none' stroke='%23C4A060' stroke-width='1'/%3E%3Cpath d='M0 260 Q70 220 160 260 T320 240 T500 270' fill='none' stroke='%23C4A060' stroke-width='0.8'/%3E%3Cpath d='M0 320 Q100 280 200 320 T380 300 T500 330' fill='none' stroke='%23C4A060' stroke-width='0.7'/%3E%3Cpath d='M0 380 Q80 340 170 380 T340 360 T500 390' fill='none' stroke='%23C4A060' stroke-width='0.9'/%3E%3Cpath d='M0 440 Q120 400 220 440 T420 420 T500 450' fill='none' stroke='%23C4A060' stroke-width='0.7'/%3E%3C/svg%3E"); background-size: 500px 500px; pointer-events: none; }
-    .app-split { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 5rem; }
-    .app-split:last-child { margin-bottom: 0; }
-    .app-split.flip .app-img { order: -1; }
-    .app-img img { width: 100%; border-radius: 8px; box-shadow: 0 20px 60px rgba(10,22,40,0.14); }
-    .app-split h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.9rem; font-weight: 700; color: var(--navy); margin-bottom: 1.5rem; }
-    .app-items { display: flex; flex-direction: column; gap: 1.25rem; }
-    .app-item { display: flex; gap: 1rem; align-items: flex-start; }
-    .app-dot { width: 38px; height: 38px; border-radius: 50%; background: var(--orange); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .app-dot.sky { background: var(--teal); }
-    .app-dot svg { width: 18px; height: 18px; color: white; }
-    .app-item h4 { font-weight: 600; font-size: 0.95rem; color: var(--navy); margin-bottom: 3px; }
-    .app-item p { font-size: 0.875rem; color: #4a5a7a; line-height: 1.5; }
-
-    /* TECHNOLOGY */
-    #technology { background: var(--navy); position: relative; overflow: hidden; }
-    #technology::before { content: ''; position: absolute; inset: 0; opacity: 0.06; background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 200 Q100 150 200 200 T400 200' fill='none' stroke='%23D4B87A' stroke-width='1.2'/%3E%3Cpath d='M0 180 Q120 130 200 180 T400 180' fill='none' stroke='%23D4B87A' stroke-width='1'/%3E%3Cpath d='M0 220 Q80 170 200 220 T400 220' fill='none' stroke='%23D4B87A' stroke-width='1'/%3E%3Cpath d='M0 100 Q150 60 200 100 T400 100' fill='none' stroke='%23D4B87A' stroke-width='0.8'/%3E%3Cpath d='M0 300 Q50 260 200 300 T400 300' fill='none' stroke='%23D4B87A' stroke-width='0.8'/%3E%3Cpath d='M0 50 Q180 20 250 50 T400 30' fill='none' stroke='%23D4B87A' stroke-width='0.6'/%3E%3Cpath d='M0 350 Q70 320 200 350 T400 330' fill='none' stroke='%23D4B87A' stroke-width='0.6'/%3E%3C/svg%3E"); background-size: 400px 400px; pointer-events: none; }
-    .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; position: relative; }
-    .tech-specs { display: flex; flex-direction: column; gap: 0.85rem; margin-top: 0.5rem; }
-    .tech-spec { display: flex; align-items: flex-start; gap: 1rem; padding: 1.1rem 1.25rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 6px; transition: background 0.2s, border-color 0.2s; }
-    .tech-spec:hover { background: rgba(232,99,42,0.06); border-color: rgba(232,99,42,0.25); }
-    .t-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--orange); flex-shrink: 0; margin-top: 5px; }
-    .tech-spec strong { color: var(--white); font-size: 0.93rem; display: block; margin-bottom: 2px; }
-    .tech-spec span { color: var(--gray); font-size: 0.85rem; }
-    .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .metric { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 6px; padding: 1.5rem; text-align: center; }
-    .metric .num { font-family: 'Barlow Condensed', sans-serif; font-size: 2.4rem; font-weight: 700; color: var(--orange); line-height: 1; }
-    .metric .unit { font-size: 1rem; }
-    .metric .lbl { font-size: 0.78rem; color: var(--gray); margin-top: 5px; }
-
-    /* GALLERY */
-    #gallery { background: #eef3fa; position: relative; }
-    #gallery::before { content: ''; position: absolute; inset: 0; opacity: 0.05; background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 70 Q100 30 200 70 T400 60' fill='none' stroke='%23C4A060' stroke-width='0.9'/%3E%3Cpath d='M0 140 Q80 100 180 140 T380 120 T400 150' fill='none' stroke='%23C4A060' stroke-width='0.8'/%3E%3Cpath d='M0 210 Q120 170 240 210 T400 200' fill='none' stroke='%23C4A060' stroke-width='1'/%3E%3Cpath d='M0 280 Q90 240 190 280 T400 260' fill='none' stroke='%23C4A060' stroke-width='0.8'/%3E%3Cpath d='M0 350 Q110 310 220 350 T400 330' fill='none' stroke='%23C4A060' stroke-width='0.7'/%3E%3C/svg%3E"); background-size: 400px 400px; pointer-events: none; }
-    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; position: relative; }
-    .g-item { border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px rgba(10,22,40,0.1); transition: transform 0.3s, box-shadow 0.3s; }
-    .g-item:hover { transform: scale(1.02); box-shadow: 0 12px 40px rgba(10,22,40,0.18); }
-    .g-item img { width: 100%; height: 210px; object-fit: cover; display: block; }
-    .g-cap { background: var(--white); padding: 1rem; }
-    .g-cap h3 { font-weight: 600; font-size: 0.93rem; color: var(--navy); margin-bottom: 3px; }
-    .g-cap p { font-size: 0.8rem; color: #4a5a7a; }
-
-    /* ABOUT */
-    #about { background: var(--white); position: relative; overflow: hidden; }
-    #about::before { content: ''; position: absolute; inset: 0; opacity: 0.04; background-image: url("data:image/svg+xml,%3Csvg width='500' height='500' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 100 Q120 60 250 100 T500 80' fill='none' stroke='%23C4A060' stroke-width='1'/%3E%3Cpath d='M0 170 Q80 130 200 170 T420 150 T500 180' fill='none' stroke='%23C4A060' stroke-width='0.8'/%3E%3Cpath d='M0 240 Q140 200 280 240 T500 220' fill='none' stroke='%23C4A060' stroke-width='0.9'/%3E%3Cpath d='M0 310 Q100 270 210 310 T440 290 T500 320' fill='none' stroke='%23C4A060' stroke-width='0.7'/%3E%3Cpath d='M0 380 Q130 340 250 380 T500 360' fill='none' stroke='%23C4A060' stroke-width='0.8'/%3E%3Cpath d='M0 450 Q90 410 190 450 T400 430 T500 460' fill='none' stroke='%23C4A060' stroke-width='0.7'/%3E%3C/svg%3E"); background-size: 500px 500px; pointer-events: none; }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; position: relative; }
-    .about-text p { color: #4a5a7a; line-height: 1.8; margin-bottom: 0.9rem; }
-    .badges { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
-    .badge { display: inline-flex; align-items: center; gap: 6px; background: #fdf0e8; color: var(--teal); padding: 5px 13px; border-radius: 100px; font-size: 0.78rem; font-weight: 600; }
-    .badge::before { content: '✓'; color: var(--orange); }
-    .about-panel { background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%); border-radius: 8px; padding: 2rem; position: relative; overflow: hidden; }
-    .about-panel::before { content: ''; position: absolute; inset: 0; opacity: 0.08; background-image: url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 100 Q80 60 150 100 T300 80' fill='none' stroke='%23D4B87A' stroke-width='1'/%3E%3Cpath d='M0 150 Q100 110 150 150 T300 130' fill='none' stroke='%23D4B87A' stroke-width='0.8'/%3E%3Cpath d='M0 200 Q60 160 150 200 T300 180' fill='none' stroke='%23D4B87A' stroke-width='0.8'/%3E%3Cpath d='M0 250 Q120 210 150 250 T300 230' fill='none' stroke='%23D4B87A' stroke-width='0.6'/%3E%3C/svg%3E"); background-size: 300px 300px; pointer-events: none; }
-    .a-stat { text-align: center; padding: 1.25rem; }
-    .a-stat .big { font-family: 'Barlow Condensed', sans-serif; font-size: 2.8rem; font-weight: 700; color: var(--orange); line-height: 1; }
-    .a-stat .lbl { font-size: 0.8rem; color: rgba(248,250,255,0.55); margin-top: 5px; }
-    .a-divider { border: none; border-top: 1px solid rgba(255,255,255,0.09); }
-
-    /* CONTACT */
-    #contact { background: #eef3fa; position: relative; overflow: hidden; }
-    #contact::before { content: ''; position: absolute; inset: 0; opacity: 0.06; background-image: url("data:image/svg+xml,%3Csvg width='600' height='600' xmlns='http://www.w3.org/2000/svg'%3E%3C!-- Peak 1 ---%3E%3Cellipse cx='150' cy='200' rx='130' ry='90' fill='none' stroke='%23C4A060' stroke-width='0.8'/%3E%3Cellipse cx='150' cy='200' rx='100' ry='68' fill='none' stroke='%23C4A060' stroke-width='0.9'/%3E%3Cellipse cx='150' cy='200' rx='70' ry='46' fill='none' stroke='%23C4A060' stroke-width='1'/%3E%3Cellipse cx='150' cy='200' rx='40' ry='25' fill='none' stroke='%23C4A060' stroke-width='1.1'/%3E%3Cellipse cx='150' cy='200' rx='15' ry='10' fill='none' stroke='%23C4A060' stroke-width='1.2'/%3E%3C!-- Peak 2 ---%3E%3Cellipse cx='450' cy='350' rx='120' ry='80' fill='none' stroke='%23C4A060' stroke-width='0.7'/%3E%3Cellipse cx='450' cy='350' rx='85' ry='55' fill='none' stroke='%23C4A060' stroke-width='0.8'/%3E%3Cellipse cx='450' cy='350' rx='55' ry='35' fill='none' stroke='%23C4A060' stroke-width='0.9'/%3E%3Cellipse cx='450' cy='350' rx='25' ry='15' fill='none' stroke='%23C4A060' stroke-width='1'/%3E%3C!-- Ridge lines connecting ---%3E%3Cpath d='M280 200 Q350 250 400 280' fill='none' stroke='%23C4A060' stroke-width='0.6'/%3E%3Cpath d='M250 180 Q320 220 380 260' fill='none' stroke='%23C4A060' stroke-width='0.5'/%3E%3C!-- Small peak 3 ---%3E%3Cellipse cx='500' cy='100' rx='80' ry='55' fill='none' stroke='%23C4A060' stroke-width='0.7'/%3E%3Cellipse cx='500' cy='100' rx='50' ry='33' fill='none' stroke='%23C4A060' stroke-width='0.8'/%3E%3Cellipse cx='500' cy='100' rx='22' ry='14' fill='none' stroke='%23C4A060' stroke-width='0.9'/%3E%3C!-- Valley flow lines ---%3E%3Cpath d='M0 400 Q100 380 200 420 T400 400 T600 430' fill='none' stroke='%2358A0B8' stroke-width='0.5'/%3E%3Cpath d='M0 500 Q150 470 300 510 T600 490' fill='none' stroke='%2358A0B8' stroke-width='0.5'/%3E%3C/svg%3E"); background-size: 600px 600px; pointer-events: none; }
-    #contact::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--orange), var(--teal-light), var(--orange)); opacity: 0.5; }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; position: relative; }
-    .cf { background: var(--white); border-radius: 8px; padding: 2.25rem; box-shadow: 0 4px 30px rgba(10,22,40,0.07); }
-    .cf h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--navy); margin-bottom: 1.5rem; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .fg { margin-bottom: 1rem; }
-    .fg label { display: block; font-size: 0.83rem; font-weight: 600; color: var(--navy); margin-bottom: 5px; }
-    .fg input, .fg select, .fg textarea { width: 100%; padding: 9px 13px; border: 1px solid #dde6f5; border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--navy); outline: none; transition: border-color 0.2s; }
-    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--orange); }
-    .fg textarea { resize: vertical; min-height: 90px; }
-    .ci { display: flex; flex-direction: column; gap: 1.25rem; }
-    .ci-card { background: var(--white); border-radius: 8px; padding: 1.75rem; box-shadow: 0 4px 20px rgba(10,22,40,0.06); }
-    .ci-card h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--navy); margin-bottom: 1.1rem; }
-    .ci-row { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.9rem; }
-    .ci-icon { width: 42px; height: 42px; background: var(--teal); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .ci-icon svg { width: 19px; height: 19px; color: white; }
-    .ci-lbl { font-size: 0.75rem; color: var(--gray); font-weight: 600; }
-    .ci-val { font-size: 0.92rem; color: var(--navy); font-weight: 500; }
-    .why-panel { background: linear-gradient(135deg, var(--orange) 0%, var(--orange-bright) 100%); border-radius: 8px; padding: 1.75rem; }
-    .why-panel h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.35rem; font-weight: 700; color: white; margin-bottom: 1rem; }
-    .why-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-    .why-list li { display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,0.9); font-size: 0.88rem; font-weight: 500; }
-    .why-list li::before { content: '✓'; color: white; width: 19px; height: 19px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; flex-shrink: 0; text-align: center; line-height: 19px; }
-
-    /* FOOTER */
-    footer { background: var(--navy); color: var(--white); padding: 4rem 2rem 2rem; position: relative; overflow: hidden; }
-    footer::before { content: ''; position: absolute; inset: 0; opacity: 0.05; background-image: url("data:image/svg+xml,%3Csvg width='500' height='500' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 100 Q120 60 250 100 T500 80' fill='none' stroke='%23D4B87A' stroke-width='1'/%3E%3Cpath d='M0 180 Q90 140 200 180 T420 160 T500 190' fill='none' stroke='%23D4B87A' stroke-width='0.9'/%3E%3Cpath d='M0 260 Q130 220 260 260 T500 240' fill='none' stroke='%23D4B87A' stroke-width='0.8'/%3E%3Cpath d='M0 340 Q80 300 180 340 T380 320 T500 350' fill='none' stroke='%23D4B87A' stroke-width='0.9'/%3E%3Cpath d='M0 420 Q110 380 230 420 T460 400 T500 430' fill='none' stroke='%23D4B87A' stroke-width='0.7'/%3E%3C/svg%3E"); background-size: 500px 500px; pointer-events: none; }
-    .footer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; position: relative; }
-    .f-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
-    .f-logo svg { width: 26px; height: 26px; color: var(--orange); }
-    .f-logo span { font-family: 'Barlow Condensed', sans-serif; font-size: 1.15rem; font-weight: 700; letter-spacing: 0.05em; }
-    footer p { color: var(--gray); font-size: 0.875rem; line-height: 1.65; max-width: 300px; }
-    .f-col h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: white; margin-bottom: 0.9rem; }
-    .f-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
-    .f-col ul a { color: var(--gray); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
-    .f-col ul a:hover { color: var(--orange); }
-    .f-bottom { max-width: 1100px; margin: 3rem auto 0; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--gray); flex-wrap: wrap; gap: 0.75rem; position: relative; }
-
-    /* RTK BLOCK */
-    .rtk-block { margin-top: 3.5rem; padding: 2rem 2.5rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(47,168,255,0.18); border-radius: 10px; }
-    .rtk-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--white); margin-bottom: 0.85rem; }
-    .rtk-intro { color: rgba(248,250,255,0.65); font-size: 0.95rem; line-height: 1.75; margin-bottom: 2rem; max-width: 860px; }
-    .rtk-benefits { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.1rem; }
-    .rtk-benefit { display: flex; align-items: flex-start; gap: 0.85rem; padding: 1.1rem 1.25rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 6px; transition: background 0.2s, border-color 0.2s; }
-    .rtk-benefit:hover { background: rgba(47,168,255,0.06); border-color: rgba(47,168,255,0.22); }
-    .rtk-benefit strong { color: var(--white); font-size: 0.93rem; display: block; margin-bottom: 3px; }
-    .rtk-benefit span { color: var(--gray); font-size: 0.83rem; line-height: 1.55; }
-    .rtk-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sky); flex-shrink: 0; margin-top: 5px; }
-
-    /* AIRCRAFT CARDS */
-    .aircraft-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; margin-bottom: 3rem; }
-    .aircraft-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: 10px; overflow: hidden; transition: border-color 0.25s, box-shadow 0.25s; }
-    .aircraft-card:hover { border-color: rgba(232,99,42,0.35); box-shadow: 0 8px 40px rgba(0,0,0,0.35); }
-    .aircraft-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
-    .aircraft-card-body { padding: 1.5rem 1.75rem 1.75rem; }
-    .aircraft-badge { display: inline-block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--orange); background: rgba(232,99,42,0.12); border: 1px solid rgba(232,99,42,0.25); border-radius: 4px; padding: 3px 9px; margin-bottom: 0.65rem; }
-    .aircraft-badge.teal { color: var(--teal-light); background: rgba(74,172,188,0.1); border-color: rgba(74,172,188,0.25); }
-    .aircraft-card-body h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--white); margin-bottom: 0.25rem; }
-    .aircraft-card-body .aircraft-sub { font-size: 0.85rem; color: var(--gray); margin-bottom: 1.1rem; }
-    .aircraft-features { display: flex; flex-direction: column; gap: 0.55rem; }
-    .aircraft-feature { display: flex; align-items: flex-start; gap: 0.65rem; font-size: 0.875rem; color: rgba(248,250,255,0.75); }
-    .aircraft-feature::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--orange); flex-shrink: 0; margin-top: 6px; }
-    .aircraft-card.secondary .aircraft-feature::before { background: var(--teal-light); }
-    @media (max-width: 768px) { .aircraft-grid { grid-template-columns: 1fr; } .aircraft-card img { height: 200px; } }
+    #services { background: var(--bg); }
+    .services-header {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: end; margin-bottom: 5rem;
+    }
+    .svc-list-grid {
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .svc-row {
+      display: grid; grid-template-columns: 80px 1fr auto;
+      align-items: center; gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: all 0.2s;
+      cursor: default;
+    }
+    .svc-row:first-child { border-top: 1px solid var(--border); }
+    .svc-row:hover { background: var(--card); padding-left: 1.5rem; padding-right: 1.5rem; margin: 0 -1.5rem; }
+    .svc-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem; color: var(--border);
+      letter-spacing: 0.02em; line-height: 1;
+      transition: color 0.2s;
+    }
+    .svc-row:hover .svc-num { color: var(--lime); }
+    .svc-body h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem; letter-spacing: 0.04em;
+      color: var(--white); margin-bottom: 0.4rem;
+    }
+    .svc-body p { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
+    .svc-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: flex-end; }
+    .tag {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 4px 10px; border: 1px solid var(--border);
+      color: var(--muted); border-radius: 2px;
+      white-space: nowrap;
+    }
+    .tag.lime { border-color: rgba(186,212,41,0.3); color: var(--lime); }
 
     /* HOW IT WORKS */
-    #process { background: var(--navy); position: relative; overflow: hidden; }
-    #process::before { content: ''; position: absolute; inset: 0; opacity: 0.05; background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1.5' fill='%23D4B87A'/%3E%3C/svg%3E"); background-size: 60px 60px; pointer-events: none; }
-    .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; margin-top: 3rem; }
-    .process-steps::before { content: ''; position: absolute; top: 28px; left: 12.5%; right: 12.5%; height: 2px; background: linear-gradient(90deg, var(--orange), var(--teal-light)); opacity: 0.35; z-index: 0; }
-    .process-step { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 1.5rem; position: relative; z-index: 1; }
-    .step-num { width: 56px; height: 56px; border-radius: 50%; background: var(--navy-mid); border: 2px solid var(--orange); display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--orange); margin-bottom: 1.25rem; flex-shrink: 0; }
-    .process-step h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--white); margin-bottom: 0.6rem; }
-    .process-step p { font-size: 0.875rem; color: var(--gray); line-height: 1.65; }
+    #process { background: var(--bg2); }
+    .process-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; margin-top: 4rem; position: relative;
+    }
+    .process-grid::before {
+      content: '';
+      position: absolute;
+      top: 27px; left: calc(12.5% + 20px); right: calc(12.5% + 20px);
+      height: 1px; background: var(--lime); opacity: 0.3;
+    }
+    .process-step { padding: 0 2rem; position: relative; }
+    .process-step:first-child { padding-left: 0; }
+    .process-step:last-child { padding-right: 0; }
+    .step-num {
+      width: 56px; height: 56px;
+      border: 1px solid var(--lime);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem; color: var(--lime);
+      margin-bottom: 1.75rem;
+      background: var(--bg2);
+      position: relative; z-index: 1;
+    }
+    .process-step h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem; letter-spacing: 0.04em;
+      color: var(--white); margin-bottom: 0.6rem;
+    }
+    .process-step p { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
+
+    /* INDUSTRIES */
+    #industries { background: var(--bg); }
+    .industry-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-bottom: 1px;
+      min-height: 480px;
+    }
+    .industry-block.flip .ind-img { order: -1; }
+    .ind-img {
+      overflow: hidden; position: relative;
+    }
+    .ind-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      filter: brightness(0.8) contrast(1.05);
+      transition: transform 0.6s ease;
+      display: block;
+    }
+    .industry-block:hover .ind-img img { transform: scale(1.03); }
+    .ind-img::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(10,10,11,0.2) 0%, transparent 60%);
+    }
+    .ind-content {
+      background: var(--bg2);
+      padding: 4rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .ind-content h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.4rem; letter-spacing: 0.03em;
+      color: var(--white); margin-bottom: 1.25rem;
+      line-height: 1;
+    }
+    .ind-list { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+    .ind-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 0.9rem; color: var(--dim); line-height: 1.5;
+    }
+    .ind-list li::before {
+      content: '';
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--lime); flex-shrink: 0; margin-top: 8px;
+    }
+    .ind-list li strong { color: var(--white); font-weight: 600; display: block; margin-bottom: 2px; }
+
+    /* TECHNOLOGY */
+    #technology { background: var(--bg3); }
+    .tech-cards {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; margin-top: 4rem;
+      background: var(--border);
+    }
+    .tech-card {
+      background: var(--card);
+      padding: 3rem;
+      position: relative; overflow: hidden;
+    }
+    .tech-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; background: var(--lime);
+    }
+    .tech-card-label {
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--lime); margin-bottom: 1.25rem;
+    }
+    .tech-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem; letter-spacing: 0.03em;
+      color: var(--white); margin-bottom: 0.5rem; line-height: 1;
+    }
+    .tech-card .tc-sub {
+      font-size: 0.85rem; color: var(--muted);
+      margin-bottom: 2rem; line-height: 1.5;
+    }
+    .tech-img {
+      width: 100%; height: 220px;
+      object-fit: cover; object-position: center;
+      border-radius: 2px; margin-bottom: 2rem;
+      filter: brightness(0.85);
+    }
+    .tech-specs-list { display: flex; flex-direction: column; gap: 0.6rem; }
+    .ts-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+    .ts-row:last-child { border-bottom: none; }
+    .ts-key { color: var(--muted); }
+    .ts-val { color: var(--white); font-weight: 600; font-size: 0.875rem; }
 
     /* DELIVERABLES */
-    #deliverables { background: #eef3fa; position: relative; }
-    .deliverables-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 0.5rem; }
-    .del-card { background: var(--white); border: 1px solid #dde6f5; border-radius: 8px; padding: 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s; }
-    .del-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(10,22,40,0.1); border-color: var(--orange); }
-    .del-icon { width: 44px; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: var(--teal); flex-shrink: 0; }
-    .del-icon.orange { background: var(--orange); }
-    .del-icon svg { width: 22px; height: 22px; color: white; }
-    .del-card h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--navy); }
-    .del-card p { font-size: 0.875rem; color: #4a5a7a; line-height: 1.6; }
-    .del-tag { font-size: 0.75rem; font-weight: 600; color: var(--teal); background: rgba(27,107,125,0.08); padding: 3px 9px; border-radius: 4px; align-self: flex-start; }
+    #deliverables { background: var(--bg); }
+    .deliv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-top: 4rem;
+    }
+    .deliv-card {
+      background: var(--card);
+      padding: 2.25rem;
+      transition: background 0.2s;
+    }
+    .deliv-card:hover { background: var(--bg3); }
+    .deliv-icon {
+      width: 44px; height: 44px;
+      border: 1px solid rgba(186,212,41,0.25);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .deliv-icon svg { width: 20px; height: 20px; color: var(--lime); }
+    .deliv-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem; letter-spacing: 0.04em;
+      color: var(--white); margin-bottom: 0.5rem;
+    }
+    .deliv-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.25rem; }
+    .deliv-formats { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .fmt {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 3px 8px;
+      background: rgba(186,212,41,0.08);
+      color: var(--lime);
+      border: 1px solid rgba(186,212,41,0.2);
+      border-radius: 2px;
+    }
 
-    /* REAL ESTATE NOTE */
-    .re-note { margin-top: 2.5rem; padding: 1.25rem 1.75rem; background: var(--white); border: 1px solid #dde6f5; border-radius: 8px; display: flex; align-items: center; gap: 1rem; }
-    .re-note-icon { width: 38px; height: 38px; border-radius: 6px; background: var(--gray-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .re-note-icon svg { width: 20px; height: 20px; color: #4a5a7a; }
-    .re-note p { font-size: 0.875rem; color: #4a5a7a; line-height: 1.6; }
-    .re-note strong { color: var(--navy); }
+    /* GALLERY */
+    #gallery { background: var(--bg2); }
+    .gallery-bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(2, 280px);
+      gap: 4px;
+      margin-top: 3.5rem;
+    }
+    .gb-1 { grid-column: 1 / 6; grid-row: 1 / 2; }
+    .gb-2 { grid-column: 6 / 9; grid-row: 1 / 2; }
+    .gb-3 { grid-column: 9 / 13; grid-row: 1 / 2; }
+    .gb-4 { grid-column: 1 / 5; grid-row: 2 / 3; }
+    .gb-5 { grid-column: 5 / 13; grid-row: 2 / 3; }
+    .gb-item {
+      overflow: hidden; position: relative;
+    }
+    .gb-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+      filter: brightness(0.8) grayscale(0.15);
+    }
+    .gb-item:hover img { transform: scale(1.04); filter: brightness(0.9) grayscale(0); }
+    .gb-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,10,11,0.7) 0%, transparent 50%);
+      display: flex; align-items: flex-end;
+      padding: 1.25rem;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .gb-item:hover .gb-overlay { opacity: 1; }
+    .gb-cap {
+      font-size: 0.78rem; font-weight: 600;
+      color: var(--white); letter-spacing: 0.04em;
+    }
+
+    /* CONTACT */
+    #contact { background: var(--bg3); }
+    .contact-wrap {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 5rem; align-items: start;
+    }
+    .contact-info { padding-top: 0.5rem; }
+    .contact-info p.desc { font-size: 0.95rem; color: var(--dim); line-height: 1.75; margin-bottom: 3rem; }
+    .ci-items { display: flex; flex-direction: column; gap: 2rem; }
+    .ci-item { display: flex; align-items: flex-start; gap: 1rem; }
+    .ci-dot {
+      width: 36px; height: 36px; flex-shrink: 0;
+      border: 1px solid rgba(186,212,41,0.3);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ci-dot svg { width: 16px; height: 16px; color: var(--lime); }
+    .ci-item .ci-label { font-size: 0.7rem; color: var(--muted); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3px; }
+    .ci-item .ci-val { font-size: 0.92rem; color: var(--white); font-weight: 500; }
+    .why-items { margin-top: 3rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .why-row {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.875rem; color: var(--dim);
+    }
+    .why-row::before {
+      content: '';
+      width: 16px; height: 1px; background: var(--lime); flex-shrink: 0;
+    }
+
+    .contact-form { background: var(--card); padding: 3rem; }
+    .cf-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem; letter-spacing: 0.04em;
+      color: var(--white); margin-bottom: 2rem;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .fg { margin-bottom: 1rem; }
+    .fg label {
+      display: block; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 6px;
+    }
+    .fg input, .fg select, .fg textarea {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      border-radius: 0;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--lime); }
+    .fg select option { background: var(--bg2); }
+    .fg textarea { resize: vertical; min-height: 100px; }
+    .submit-btn {
+      width: 100%; padding: 14px;
+      background: var(--lime); color: var(--bg);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      border: none; cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+    }
+    .submit-btn:hover { background: var(--lime-d); }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 3.5rem 2rem 2rem;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 4rem;
+    }
+    .f-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem; letter-spacing: 0.08em;
+      color: var(--white); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .f-brand .f-dot { width: 7px; height: 7px; background: var(--lime); border-radius: 50%; }
+    footer .f-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; max-width: 280px; }
+    .f-col h4 {
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--white); margin-bottom: 1rem;
+    }
+    .f-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .f-col ul a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .f-col ul a:hover { color: var(--lime); }
+    .f-bottom {
+      max-width: 1200px; margin: 3rem auto 0;
+      padding-top: 1.5rem; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.75rem; color: var(--muted); flex-wrap: wrap; gap: 0.5rem;
+    }
 
     /* ANIMATIONS */
-    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-    
+    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
 
     /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .services-header { grid-template-columns: 1fr; gap: 2rem; }
+      .process-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+      .process-grid::before { display: none; }
+    }
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .hamburger { display: flex; }
-      .app-split, .app-split.flip, .tech-grid, .about-grid, .contact-grid, .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .app-split.flip .app-img { order: 0; }
-      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      #home { grid-template-columns: 1fr; }
+      .hero-left { padding: 8rem 1.5rem 3rem; }
+      .hero-right { height: 50vh; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat-item:nth-child(odd) { border-right: 1px solid var(--border); }
+      .svc-row { grid-template-columns: 60px 1fr; }
+      .svc-tags { display: none; }
+      .process-grid { grid-template-columns: 1fr; }
+      .tech-cards { grid-template-columns: 1fr; }
+      .industry-block, .industry-block.flip { grid-template-columns: 1fr; }
+      .industry-block .ind-img { height: 280px; }
+      .industry-block.flip .ind-img { order: 0; }
+      .deliv-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-bento {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(3, 200px);
+      }
+      .gb-1 { grid-column: 1 / 3; grid-row: 1; }
+      .gb-2 { grid-column: 1 / 2; grid-row: 2; }
+      .gb-3 { grid-column: 2 / 3; grid-row: 2; }
+      .gb-4 { grid-column: 1 / 2; grid-row: 3; }
+      .gb-5 { grid-column: 2 / 3; grid-row: 3; }
+      .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      section { padding: 5rem 1.25rem; }
+      .ind-content { padding: 2.5rem 1.5rem; }
       .form-row { grid-template-columns: 1fr; }
-      .metrics { grid-template-columns: 1fr 1fr; }
-      .hero-chip { display: none; }
-      section { padding: 4rem 1.25rem; }
-      .process-steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
-      .process-steps::before { display: none; }
-      .deliverables-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 480px) {
-      .gallery-grid { grid-template-columns: 1fr; }
-      .process-steps { grid-template-columns: 1fr; }
-      .deliverables-grid { grid-template-columns: 1fr; }
+      .deliv-grid { grid-template-columns: 1fr; }
+      h1.hero-title { font-size: 3.5rem; }
     }
   </style>
 </head>
@@ -292,38 +649,15 @@
 <!-- NAV -->
 <nav id="nav">
   <a href="#home" class="nav-logo">
-    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:30px;height:30px;">
-      <!-- Propeller arcs -->
-      <ellipse cx="5.5" cy="6" rx="4.5" ry="1.2" stroke="#E8632A" stroke-width="1.2" fill="none"/>
-      <ellipse cx="22.5" cy="6" rx="4.5" ry="1.2" stroke="#E8632A" stroke-width="1.2" fill="none"/>
-      <!-- Motor posts -->
-      <line x1="5.5" y1="7.2" x2="5.5" y2="9" stroke="#555" stroke-width="1.2"/>
-      <line x1="22.5" y1="7.2" x2="22.5" y2="9" stroke="#555" stroke-width="1.2"/>
-      <!-- Arms -->
-      <line x1="5.5" y1="9" x2="11" y2="11" stroke="#E8632A" stroke-width="1.5"/>
-      <line x1="22.5" y1="9" x2="17" y2="11" stroke="#E8632A" stroke-width="1.5"/>
-      <!-- Body -->
-      <rect x="10" y="9.5" width="8" height="5" rx="2" fill="#E8632A"/>
-      <!-- Landing gear -->
-      <line x1="10" y1="14.5" x2="8" y2="17.5" stroke="#555" stroke-width="1"/>
-      <line x1="18" y1="14.5" x2="20" y2="17.5" stroke="#555" stroke-width="1"/>
-      <line x1="7" y1="17.5" x2="9" y2="17.5" stroke="#555" stroke-width="1.2"/>
-      <line x1="19" y1="17.5" x2="21" y2="17.5" stroke="#555" stroke-width="1.2"/>
-      <!-- Camera -->
-      <rect x="12.5" y="14.5" width="3" height="2.5" rx="0.8" fill="#444"/>
-      <circle cx="14" cy="15.8" r="0.8" fill="#222"/>
-      <!-- Scan waves -->
-      <path d="M11 20 Q14 22 17 20" stroke="#4AACBC" stroke-width="1" fill="none"/>
-      <path d="M10 22.5 Q14 25.5 18 22.5" stroke="#4AACBC" stroke-width="0.9" fill="none" opacity="0.7"/>
-    </svg>
-    <span class="nav-logo-text">Aerial Insights LLC</span>
+    <span class="nav-logo-dot"></span>
+    Aerial Insights LLC
   </a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
-    <li><a href="#applications">Industries</a></li>
-    <li><a href="#process">How It Works</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#industries">Industries</a></li>
     <li><a href="#technology">Technology</a></li>
-    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#gallery">Work</a></li>
     <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
   </ul>
   <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
@@ -332,170 +666,124 @@
 </nav>
 <div class="mobile-nav" id="mobileNav">
   <a href="#services" onclick="closeMenu()">Services</a>
-  <a href="#applications" onclick="closeMenu()">Industries</a>
-  <a href="#process" onclick="closeMenu()">How It Works</a>
-  <a href="#deliverables" onclick="closeMenu()">Deliverables</a>
+  <a href="#process" onclick="closeMenu()">Process</a>
+  <a href="#industries" onclick="closeMenu()">Industries</a>
   <a href="#technology" onclick="closeMenu()">Technology</a>
-  <a href="#gallery" onclick="closeMenu()">Gallery</a>
-  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#gallery" onclick="closeMenu()">Work</a>
   <a href="#contact" onclick="closeMenu()">Get a Quote</a>
 </div>
 
 <!-- HERO -->
 <section id="home">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-content">
-    <div class="hero-badge">New England's Drone Inspection Specialists</div>
-    <h1 class="hero-title">Precision LiDAR &amp;<br><span class="accent">Photogrammetry Inspections</span></h1>
-    <p class="hero-sub">Advanced aerial LiDAR and photogrammetry services for construction and surveying professionals. Sub-centimeter accuracy, fast turnaround, CAD-ready deliverables.</p>
+  <div class="hero-left">
+    <div class="hero-tag">New England's LiDAR Specialists</div>
+    <h1 class="hero-title">Survey<br>Grade<br><span class="lime">From</span><br>Above.</h1>
+    <p class="hero-desc">RTK-corrected LiDAR and photogrammetry for construction and surveying professionals. Sub-centimeter accuracy, same-day deliverables, CAD-ready output.</p>
     <div class="hero-btns">
-      <a href="#services" class="btn btn-primary">Our Services</a>
-      <a href="#contact" class="btn btn-outline">Get a Quote</a>
+      <a href="#contact" class="btn btn-lime">Get a Quote</a>
+      <a href="#services" class="btn btn-ghost">Our Services</a>
     </div>
-    <div class="hero-img-wrap">
-      <img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/PXL_20250528_213403577.MP.jpg" alt="DJI Matrice 300 RTK Drone with LiDAR" />
+  </div>
+  <div class="hero-right">
+    <img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/DJI_20250528151303_0017_1750344619331.JPG" alt="Aerial LiDAR survey in progress" />
+    <div class="hero-badge">
+      <div class="hb-val">&lt;1cm</div>
+      <div class="hb-lbl">Survey Accuracy</div>
     </div>
   </div>
 </section>
+
+<!-- STATS -->
+<div id="stats">
+  <div class="stats-row">
+    <div class="stat-item fade-up">
+      <div class="stat-num">2M+</div>
+      <div class="stat-label">LiDAR Points Per Second</div>
+    </div>
+    <div class="stat-item fade-up">
+      <div class="stat-num">100+</div>
+      <div class="stat-label">Acres Per 30-Minute Flight</div>
+    </div>
+    <div class="stat-item fade-up">
+      <div class="stat-num">48hr</div>
+      <div class="stat-label">Typical Turnaround</div>
+    </div>
+    <div class="stat-item fade-up">
+      <div class="stat-num">360°</div>
+      <div class="stat-label">Field of View Coverage</div>
+    </div>
+  </div>
+</div>
 
 <!-- SERVICES -->
 <section id="services">
   <div class="container">
-    <p class="sec-label">What We Offer</p>
-    <h2 class="sec-title">Our LiDAR Services</h2>
-    <p class="sec-desc">Comprehensive drone-based LiDAR solutions tailored for construction and surveying professionals across New England.</p>
-    <div class="services-grid">
-      <div class="svc-card fade-in">
-        <div class="svc-icon orange">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M14.1 5.55a2 2 0 0 0 1.78 0l3.66-1.83A1 1 0 0 1 21 4.62v12.76a1 1 0 0 1-.55.9l-4.55 2.27a2 2 0 0 1-1.78 0L9.9 18.45a2 2 0 0 0-1.78 0l-3.66 1.83A1 1 0 0 1 3 19.38V6.62a1 1 0 0 1 .55-.9l4.55-2.27a2 2 0 0 1 1.78 0z"/>
-            <path d="M15 5.76v15M9 3.24v15"/>
-          </svg>
-        </div>
-        <h3>Topographic Mapping</h3>
-        <p>High-precision elevation data and contour mapping for construction planning and site analysis.</p>
-        <ul class="svc-list">
-          <li>Sub-centimeter accuracy</li>
-          <li>Digital terrain models</li>
-          <li>CAD-ready deliverables</li>
-        </ul>
+    <div class="services-header">
+      <div>
+        <div class="sec-eyebrow">What We Offer</div>
+        <h2 class="sec-title">Our Services</h2>
       </div>
-      <div class="svc-card fade-in">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
-            <path d="m3.3 7 8.7 5 8.7-5M12 22V12"/>
-          </svg>
-        </div>
-        <h3>Volumetric Analysis</h3>
-        <p>Accurate volume calculations for earthwork, stockpiles, and material management on active job sites.</p>
-        <ul class="svc-list">
-          <li>Cut/fill calculations</li>
-          <li>Stockpile monitoring</li>
-          <li>Progress tracking</li>
-        </ul>
-      </div>
-      <div class="svc-card fade-in">
-        <div class="svc-icon orange">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect width="16" height="20" x="4" y="2" rx="2"/>
-            <path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/>
-          </svg>
-        </div>
-        <h3>As-Built Documentation</h3>
-        <p>Comprehensive documentation of completed structures and infrastructure for record and compliance.</p>
-        <ul class="svc-list">
-          <li>3D point clouds</li>
-          <li>BIM integration</li>
-          <li>Quality assurance</li>
-        </ul>
-      </div>
+      <p class="sec-desc">Comprehensive drone-based LiDAR and photogrammetry solutions tailored for construction and surveying professionals across New England. Every flight RTK-corrected.</p>
     </div>
-  </div>
-</section>
-
-<!-- APPLICATIONS -->
-<section id="applications">
-  <div class="container">
-    <p class="sec-label">Industry Use Cases</p>
-    <h2 class="sec-title">Industry Applications</h2>
-    <p class="sec-desc">Our LiDAR technology serves diverse construction and surveying needs across New England.</p>
-
-    <div class="app-split">
-      <div class="app-text">
-        <h3>Construction Industry</h3>
-        <div class="app-items">
-          <div class="app-item">
-            <div class="app-dot">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z"/><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5M4 15v-3a6 6 0 0 1 6-6M14 6a6 6 0 0 1 6 6v3"/></svg>
-            </div>
-            <div>
-              <h4>Site Preparation &amp; Planning</h4>
-              <p>Accurate terrain modeling for optimal construction planning and earthwork calculations.</p>
-            </div>
-          </div>
-          <div class="app-item">
-            <div class="app-dot">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-            </div>
-            <div>
-              <h4>Progress Monitoring</h4>
-              <p>Track construction progress with regular scanning and volumetric analysis.</p>
-            </div>
-          </div>
-          <div class="app-item">
-            <div class="app-dot">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
-            </div>
-            <div>
-              <h4>Quality Control</h4>
-              <p>Verify construction accuracy against design specifications with precise measurements.</p>
-            </div>
-          </div>
+    <div class="svc-list-grid">
+      <div class="svc-row fade-up">
+        <div class="svc-num">01</div>
+        <div class="svc-body">
+          <h3>Topographic Mapping</h3>
+          <p>High-precision elevation data and contour mapping for construction planning and site analysis. Digital terrain and surface models delivered in your preferred format.</p>
+        </div>
+        <div class="svc-tags">
+          <span class="tag lime">LiDAR</span>
+          <span class="tag">DTM / DSM</span>
+          <span class="tag">CAD</span>
         </div>
       </div>
-      <div class="app-img">
-        <img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/DJI_20250528151303_0017_1750344619331.JPG" alt="Construction site aerial view" />
-      </div>
-    </div>
-
-    <div class="app-split flip" style="margin-top:4rem;">
-      <div class="app-text">
-        <h3>Assisting Surveying Professionals</h3>
-        <div class="app-items">
-          <div class="app-item">
-            <div class="app-dot sky">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/><circle cx="12" cy="12" r="10"/></svg>
-            </div>
-            <div>
-              <h4>Boundary Inspections</h4>
-              <p>High-precision property boundary determination for licensed surveyors.</p>
-            </div>
-          </div>
-          <div class="app-item">
-            <div class="app-dot sky">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
-            </div>
-            <div>
-              <h4>Environmental Mapping</h4>
-              <p>Detailed topographic scanning for environmental impact assessments.</p>
-            </div>
-          </div>
-          <div class="app-item">
-            <div class="app-dot sky">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg>
-            </div>
-            <div>
-              <h4>Infrastructure Planning</h4>
-              <p>Corridor scans for roads, utilities, and pipeline projects.</p>
-            </div>
-          </div>
+      <div class="svc-row fade-up">
+        <div class="svc-num">02</div>
+        <div class="svc-body">
+          <h3>Volumetric Analysis</h3>
+          <p>Accurate volume calculations for earthwork, stockpiles, and material management on active job sites. Cut/fill analysis and progress tracking on demand.</p>
+        </div>
+        <div class="svc-tags">
+          <span class="tag lime">Photogrammetry</span>
+          <span class="tag">Cut / Fill</span>
+          <span class="tag">Stockpile</span>
         </div>
       </div>
-      <div class="app-img">
-        <img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/DJI_20250528152825_0044_Zenmuse-L1-mission_1750344602055.JPG" alt="Surveying professionals in the field" />
+      <div class="svc-row fade-up">
+        <div class="svc-num">03</div>
+        <div class="svc-body">
+          <h3>As-Built Documentation</h3>
+          <p>Comprehensive 3D documentation of completed structures and infrastructure for record-keeping, compliance, and BIM integration.</p>
+        </div>
+        <div class="svc-tags">
+          <span class="tag lime">3D Point Cloud</span>
+          <span class="tag">BIM</span>
+          <span class="tag">QA</span>
+        </div>
+      </div>
+      <div class="svc-row fade-up">
+        <div class="svc-num">04</div>
+        <div class="svc-body">
+          <h3>Progress Monitoring</h3>
+          <p>Scheduled repeat flights to track construction progress with consistent volumetric and positional data across the full project lifecycle.</p>
+        </div>
+        <div class="svc-tags">
+          <span class="tag lime">Repeat Flights</span>
+          <span class="tag">Change Detection</span>
+        </div>
+      </div>
+      <div class="svc-row fade-up">
+        <div class="svc-num">05</div>
+        <div class="svc-body">
+          <h3>Boundary &amp; Environmental Surveys</h3>
+          <p>High-precision data for licensed surveyors: property boundaries, topographic scanning for environmental impact assessments, and corridor surveys for utilities.</p>
+        </div>
+        <div class="svc-tags">
+          <span class="tag lime">Survey Support</span>
+          <span class="tag">Corridor</span>
+          <span class="tag">Environmental</span>
+        </div>
       </div>
     </div>
   </div>
@@ -504,29 +792,105 @@
 <!-- HOW IT WORKS -->
 <section id="process">
   <div class="container">
-    <p class="sec-label light">The Process</p>
-    <h2 class="sec-title light">From Mission Brief to Final Deliverable</h2>
-    <p class="sec-desc light">A streamlined four-step workflow — from site consultation to CAD-ready files in your inbox.</p>
-    <div class="process-steps fade-in">
-      <div class="process-step">
+    <div class="sec-eyebrow">From Flight to File</div>
+    <h2 class="sec-title">How It Works</h2>
+    <div class="process-grid">
+      <div class="process-step fade-up">
         <div class="step-num">01</div>
-        <h3>Consult &amp; Plan</h3>
-        <p>We review your project scope, set accuracy requirements, and file all FAA airspace authorizations before wheels-up.</p>
+        <h3>Consult</h3>
+        <p>We review your project scope, site conditions, and required deliverables. You get a firm quote — no surprises.</p>
       </div>
-      <div class="process-step">
+      <div class="process-step fade-up">
         <div class="step-num">02</div>
-        <h3>Mission Execution</h3>
-        <p>Our pilot flies a GPS-locked automated flight path, collecting millions of data points with centimeter-level RTK corrections on every pass.</p>
+        <h3>Fly</h3>
+        <p>RTK-corrected autonomous flight with the DJI Matrice 300 RTK + Zenmuse L1. Every point geotagged to centimeter accuracy.</p>
       </div>
-      <div class="process-step">
+      <div class="process-step fade-up">
         <div class="step-num">03</div>
-        <h3>Data Processing</h3>
-        <p>Raw LiDAR and imagery run through our processing pipeline — georeferenced, filtered, classified, and QC-checked for accuracy.</p>
+        <h3>Process</h3>
+        <p>Raw point clouds are processed, classified, and quality-checked. DEMs, orthomosaics, and volumes extracted and verified.</p>
       </div>
-      <div class="process-step">
+      <div class="process-step fade-up">
         <div class="step-num">04</div>
-        <h3>Deliverables</h3>
-        <p>Survey-ready files hit your inbox: point clouds, DEMs, orthos, and CAD-ready exports — typically within 48 hours of the flight.</p>
+        <h3>Deliver</h3>
+        <p>CAD-ready files, point clouds, and reports delivered within 48 hours — formatted for your workflow and software stack.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section id="industries" style="padding: 0;">
+  <div style="max-width:100%;">
+    <div style="padding: 7rem 2rem 3rem; max-width:1200px; margin: 0 auto;">
+      <div class="sec-eyebrow">Who We Serve</div>
+      <h2 class="sec-title">Industry Applications</h2>
+    </div>
+
+    <div class="industry-block fade-up">
+      <div class="ind-img">
+        <img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/DJI_20250528151303_0017_1750344619331.JPG" alt="Construction site aerial view" />
+      </div>
+      <div class="ind-content">
+        <div class="sec-eyebrow" style="margin-bottom:0.75rem;">Construction</div>
+        <h3>Built on Precise Data</h3>
+        <ul class="ind-list">
+          <li><div><strong>Site Preparation &amp; Planning</strong>Accurate terrain modeling for optimal construction planning and earthwork calculations before the first machine arrives.</div></li>
+          <li><div><strong>Progress Monitoring</strong>Scheduled repeat flights with volumetric analysis — know exactly what's been moved and what's left to do.</div></li>
+          <li><div><strong>Quality Control</strong>Verify construction accuracy against design specs with precise measurements that catch errors before they become rework.</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="industry-block flip fade-up">
+      <div class="ind-img">
+        <img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/DJI_20250528152825_0044_Zenmuse-L1-mission_1750344602055.JPG" alt="Surveying mission in progress" />
+      </div>
+      <div class="ind-content">
+        <div class="sec-eyebrow" style="margin-bottom:0.75rem;">Surveying</div>
+        <h3>A Force Multiplier for Your Firm</h3>
+        <ul class="ind-list">
+          <li><div><strong>Boundary Inspections</strong>High-precision property boundary data for licensed surveyors — delivered as a survey-ready point cloud.</div></li>
+          <li><div><strong>Environmental Mapping</strong>Detailed topographic scanning for environmental impact assessments, wetland delineation, and floodplain analysis.</div></li>
+          <li><div><strong>Infrastructure &amp; Corridor Planning</strong>Efficient corridor scans for roads, utilities, and pipeline projects over large distances in minimal time.</div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNOLOGY -->
+<section id="technology">
+  <div class="container">
+    <div class="sec-eyebrow">Our Equipment</div>
+    <h2 class="sec-title">Advanced LiDAR Technology</h2>
+    <p class="sec-desc">State-of-the-art hardware delivering survey-grade accuracy on every flight. RTK corrections transmitted in real time — no GCPs, no re-surveys.</p>
+    <div class="tech-cards">
+      <div class="tech-card fade-up">
+        <div class="tech-card-label">Primary Platform</div>
+        <h3>DJI Matrice 300 RTK</h3>
+        <p class="tc-sub">With Zenmuse L1 LiDAR Payload — the industry standard for survey-grade aerial mapping.</p>
+        <img class="tech-img" src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/PXL_20250528_213403577.MP_1750344609207.jpg" alt="DJI Matrice 300 RTK with Zenmuse L1" />
+        <div class="tech-specs-list">
+          <div class="ts-row"><span class="ts-key">Pulse Rate</span><span class="ts-val">Up to 2M points/sec</span></div>
+          <div class="ts-row"><span class="ts-key">Accuracy</span><span class="ts-val">&lt;1 cm horizontal, &lt;3 cm vertical</span></div>
+          <div class="ts-row"><span class="ts-key">Max Range</span><span class="ts-val">450 m</span></div>
+          <div class="ts-row"><span class="ts-key">Returns</span><span class="ts-val">Multiple — vegetation penetration</span></div>
+          <div class="ts-row"><span class="ts-key">Corrections</span><span class="ts-val">RTK / PPK — no GCPs required</span></div>
+        </div>
+      </div>
+      <div class="tech-card fade-up">
+        <div class="tech-card-label">Photogrammetry Platform</div>
+        <h3>DJI Matrice 4E</h3>
+        <p class="tc-sub">High-resolution photogrammetry drone with integrated RTK for oblique and nadir capture.</p>
+        <img class="tech-img" src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/PXL_20251108_134530354_MP.jpg" alt="DJI Matrice 4E" />
+        <div class="tech-specs-list">
+          <div class="ts-row"><span class="ts-key">Camera</span><span class="ts-val">High-resolution wide + tele</span></div>
+          <div class="ts-row"><span class="ts-key">Positioning</span><span class="ts-val">RTK — centimeter-level geotagging</span></div>
+          <div class="ts-row"><span class="ts-key">Coverage</span><span class="ts-val">100+ acres per flight</span></div>
+          <div class="ts-row"><span class="ts-key">Output</span><span class="ts-val">Orthomosaics, 3D mesh, point cloud</span></div>
+          <div class="ts-row"><span class="ts-key">Use case</span><span class="ts-val">As-builts, documentation, site mapping</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -535,164 +899,82 @@
 <!-- DELIVERABLES -->
 <section id="deliverables">
   <div class="container">
-    <p class="sec-label">What You Get</p>
-    <h2 class="sec-title">CAD-Ready Files Within 48 Hours</h2>
-    <p class="sec-desc">Every project delivers a complete set of survey-grade outputs formatted for your software stack.</p>
-    <div class="deliverables-grid">
-      <div class="del-card fade-in">
-        <div class="del-icon orange">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    <div class="sec-eyebrow">What You Receive</div>
+    <h2 class="sec-title">Deliverables</h2>
+    <p class="sec-desc">Every project ships with production-ready files in your preferred format. No middleman, no translation layer — data you can use immediately.</p>
+    <div class="deliv-grid">
+      <div class="deliv-card fade-up">
+        <div class="deliv-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+          </svg>
         </div>
-        <h3>Point Clouds (LAS/LAZ)</h3>
-        <p>Colorized, classified, georeferenced point clouds ready for import into AutoCAD Civil 3D, Revit, or Trimble.</p>
-        <span class="del-tag">LAS · LAZ · E57</span>
-      </div>
-      <div class="del-card fade-in">
-        <div class="del-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.1 5.55a2 2 0 0 0 1.78 0l3.66-1.83A1 1 0 0 1 21 4.62v12.76a1 1 0 0 1-.55.9l-4.55 2.27a2 2 0 0 1-1.78 0L9.9 18.45a2 2 0 0 0-1.78 0l-3.66 1.83A1 1 0 0 1 3 19.38V6.62a1 1 0 0 1 .55-.9l4.55-2.27a2 2 0 0 1 1.78 0z"/><path d="M15 5.76v15M9 3.24v15"/></svg>
+        <h3>3D Point Cloud</h3>
+        <p>Classified, georeferenced LiDAR data at full density. Ground, vegetation, and structure returns separated and labeled.</p>
+        <div class="deliv-formats">
+          <span class="fmt">LAS</span><span class="fmt">LAZ</span><span class="fmt">E57</span>
         </div>
-        <h3>Digital Elevation Models</h3>
-        <p>Bare-earth DTMs and surface DSMs — high-resolution raster grids for cut/fill, drainage, and contour generation.</p>
-        <span class="del-tag">GeoTIFF · ASC · XYZ</span>
       </div>
-      <div class="del-card fade-in">
-        <div class="del-icon orange">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+      <div class="deliv-card fade-up">
+        <div class="deliv-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M8 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3M12 3h9v9"/>
+            <path d="m15 9-6 6"/>
+          </svg>
         </div>
-        <h3>Orthomosaic Maps</h3>
-        <p>Survey-accurate 2D aerial images stitched to a single georeferenced map — ideal for plan overlays and client reporting.</p>
-        <span class="del-tag">GeoTIFF · ECW · JPG</span>
+        <h3>Digital Elevation Model</h3>
+        <p>Raster DEM and DTM at 5–10 cm ground resolution. Ready for contour generation, cut/fill, and hydrologic analysis.</p>
+        <div class="deliv-formats">
+          <span class="fmt">GeoTIFF</span><span class="fmt">DWG</span><span class="fmt">DXF</span>
+        </div>
       </div>
-      <div class="del-card fade-in">
-        <div class="del-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+      <div class="deliv-card fade-up">
+        <div class="deliv-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/>
+          </svg>
+        </div>
+        <h3>Orthomosaic</h3>
+        <p>Geometrically corrected, true-to-scale aerial imagery stitched from hundreds of overlapping photos.</p>
+        <div class="deliv-formats">
+          <span class="fmt">GeoTIFF</span><span class="fmt">ECW</span>
+        </div>
+      </div>
+      <div class="deliv-card fade-up">
+        <div class="deliv-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m8 3 4 8 5-5 5 15H2L8 3z"/>
+          </svg>
         </div>
         <h3>Contour Lines</h3>
-        <p>1-foot or custom-interval contours exported as DXF or SHP — drop them straight into your CAD or GIS workflow.</p>
-        <span class="del-tag">DXF · SHP · KML</span>
-      </div>
-      <div class="del-card fade-in">
-        <div class="del-icon orange">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="m3.27 6.96 8.73 5.05 8.73-5.05M12 22.08V12"/></svg>
-        </div>
-        <h3>3D Mesh Models</h3>
-        <p>Photo-realistic mesh models for visualization, presentations, and clash detection — compatible with major BIM platforms.</p>
-        <span class="del-tag">OBJ · FBX · RCP</span>
-      </div>
-      <div class="del-card fade-in">
-        <div class="del-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-        </div>
-        <h3>Volume &amp; Progress Reports</h3>
-        <p>Cut/fill quantities, stockpile volumes, and change-detection summaries delivered as clean PDF and Excel reports.</p>
-        <span class="del-tag">PDF · XLSX · CSV</span>
-      </div>
-    </div>
-
-    <!-- Real estate subtle mention -->
-    <div class="re-note fade-in">
-      <div class="re-note-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      </div>
-      <p><strong>Also available: Aerial Photography.</strong> We offer professional aerial photography for real estate listings and property documentation as a supplemental service. <a href="#contact" style="color:var(--teal);text-decoration:none;font-weight:500;">Contact us</a> to learn more.</p>
-    </div>
-  </div>
-</section>
-
-<!-- TECHNOLOGY -->
-<section id="technology">
-  <div class="container">
-    <p class="sec-label light">Our Equipment</p>
-    <h2 class="sec-title light">Advanced LiDAR Technology</h2>
-    <p class="sec-desc light">State-of-the-art equipment delivering unmatched precision and efficiency on every project.</p>
-
-    <!-- Aircraft Cards -->
-    <div class="aircraft-grid fade-in">
-
-      <!-- M300 RTK -->
-      <div class="aircraft-card">
-        <img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/PXL_20250528_213403577.MP_1750344609207.jpg" alt="DJI Matrice 300 RTK with Zenmuse L1 LiDAR" loading="lazy" />
-        <div class="aircraft-card-body">
-          <div class="aircraft-badge">LiDAR Platform</div>
-          <h3>DJI Matrice 300 RTK</h3>
-          <p class="aircraft-sub">+ Zenmuse L1 LiDAR Payload</p>
-          <div class="aircraft-features">
-            <div class="aircraft-feature">Up to 2 million LiDAR points per second with 5-return capability</div>
-            <div class="aircraft-feature">Integrated RGB camera for simultaneous colorized point clouds</div>
-            <div class="aircraft-feature">RTK/PPK GPS — sub-centimeter positioning accuracy on every flight</div>
-            <div class="aircraft-feature">450 m max range, 360° FOV — built for large-scale topographic surveys</div>
-          </div>
+        <p>1-foot or 0.5-foot interval contours derived from the LiDAR ground model. Survey-accurate for grading and planning.</p>
+        <div class="deliv-formats">
+          <span class="fmt">DWG</span><span class="fmt">DXF</span><span class="fmt">SHP</span>
         </div>
       </div>
-
-      <!-- Matrice 4E -->
-      <div class="aircraft-card secondary">
-        <img src="https://images.unsplash.com/photo-1579829366248-204fe8413f31?auto=format&fit=crop&w=900&q=80" alt="DJI Matrice 4E drone" loading="lazy" />
-        <div class="aircraft-card-body">
-          <div class="aircraft-badge teal">Photogrammetry Platform</div>
-          <h3>DJI Matrice 4E</h3>
-          <p class="aircraft-sub">High-Resolution RGB Photogrammetry</p>
-          <div class="aircraft-features">
-            <div class="aircraft-feature">High-resolution RGB sensor optimized for photogrammetry and orthophoto production</div>
-            <div class="aircraft-feature">Compact and portable — rapid mobilization to any site with minimal setup</div>
-            <div class="aircraft-feature">Ideal for smaller sites, boundary mapping, and progress documentation</div>
-            <div class="aircraft-feature">Delivers dense point clouds, orthomosaics, and 3D models from a single flight</div>
-          </div>
+      <div class="deliv-card fade-up">
+        <div class="deliv-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+          </svg>
+        </div>
+        <h3>3D Mesh Model</h3>
+        <p>Textured 3D mesh for visualization, BIM integration, and structural documentation. Georeferenced and scaled.</p>
+        <div class="deliv-formats">
+          <span class="fmt">OBJ</span><span class="fmt">FBX</span><span class="fmt">RVT</span>
         </div>
       </div>
-
-    </div><!-- /aircraft-grid -->
-
-    <div class="tech-grid">
-      <div>
-        <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:1.45rem;font-weight:700;color:var(--white);margin-bottom:1rem;">Cutting-Edge Equipment</h3>
-        <div class="tech-specs">
-          <div class="tech-spec"><div class="t-dot"></div><div><strong>High-Frequency Pulse Lasers</strong><span>Up to 2 million points per second</span></div></div>
-          <div class="tech-spec"><div class="t-dot"></div><div><strong>RTK/PPK GPS Integration</strong><span>Centimeter-level positioning accuracy</span></div></div>
-          <div class="tech-spec"><div class="t-dot"></div><div><strong>IMU Stabilization</strong><span>Precise orientation tracking in flight</span></div></div>
-          <div class="tech-spec"><div class="t-dot"></div><div><strong>Multiple Return Capability</strong><span>Vegetation penetration for ground models</span></div></div>
+      <div class="deliv-card fade-up">
+        <div class="deliv-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+            <path d="m3.3 7 8.7 5 8.7-5M12 22V12"/>
+          </svg>
         </div>
-      </div>
-      <div class="metrics">
-        <div class="metric"><div class="num">2M<span class="unit">+</span></div><div class="lbl">Points Per Second</div></div>
-        <div class="metric"><div class="num">&lt;1<span class="unit">cm</span></div><div class="lbl">Accuracy</div></div>
-        <div class="metric"><div class="num">450<span class="unit">m</span></div><div class="lbl">Max Range</div></div>
-        <div class="metric"><div class="num">360<span class="unit">°</span></div><div class="lbl">FOV Coverage</div></div>
-      </div>
-    </div>
-
-    <!-- RTK Corrections explainer -->
-    <div class="rtk-block fade-in">
-      <h3 class="rtk-title">RTK Corrections on Every Flight</h3>
-      <p class="rtk-intro">Real-Time Kinematic (RTK) is a GPS correction technology that delivers centimeter-level positioning accuracy during flight. A fixed ground station — or a network-connected CORS station — continuously monitors satellite signals and transmits live differential corrections to the drone, geotagging every LiDAR point and image with precise real-world coordinates the moment it's captured. The result is survey-grade data without time-consuming post-processing or the need to set up dozens of ground control points across your site.</p>
-      <div class="rtk-benefits">
-        <div class="rtk-benefit">
-          <div class="rtk-dot"></div>
-          <div>
-            <strong>Survey-Grade DEM Accuracy</strong>
-            <span>2–3 cm horizontal &amp; 3–6 cm vertical accuracy — precise enough for contour mapping, cut/fill analysis, and BIM integration from a single flight</span>
-          </div>
-        </div>
-        <div class="rtk-benefit">
-          <div class="rtk-dot"></div>
-          <div>
-            <strong>No Ground Control Points Required</strong>
-            <span>RTK corrections eliminate the need to place and survey GCPs across your site, saving field crews hours of labor per project</span>
-          </div>
-        </div>
-        <div class="rtk-benefit">
-          <div class="rtk-dot"></div>
-          <div>
-            <strong>Same-Day Deliverables</strong>
-            <span>Data is geotagged and survey-ready the moment the flight ends — point clouds, orthophotos, and DEMs ready for review and upload the same day</span>
-          </div>
-        </div>
-        <div class="rtk-benefit">
-          <div class="rtk-dot"></div>
-          <div>
-            <strong>Time &amp; Cost Savings</strong>
-            <span>100+ acres mapped in under 30 minutes. Accurate first-time data prevents costly rework mid-project — grading errors, foundation misalignment, and re-mobilization costs are eliminated before they start</span>
-          </div>
+        <h3>Volume Report</h3>
+        <p>Earthwork cut/fill calculations and stockpile volumes with a signed project summary and accuracy statement.</p>
+        <div class="deliv-formats">
+          <span class="fmt">PDF</span><span class="fmt">CSV</span><span class="fmt">XLS</span>
         </div>
       </div>
     </div>
@@ -702,56 +984,28 @@
 <!-- GALLERY -->
 <section id="gallery">
   <div class="container">
-    <p class="sec-label">Our Work</p>
+    <div class="sec-eyebrow">Our Work</div>
     <h2 class="sec-title">Equipment &amp; Projects</h2>
-    <p class="sec-desc">Professional LiDAR scans from recent projects across New England.</p>
-    <div class="gallery-grid">
-      <div class="g-item">
-        <img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/PXL_20250528_213403577.MP_1750344609207.jpg" alt="DJI Matrice 300 RTK" />
-        <div class="g-cap"><h3>DJI Matrice 300 RTK</h3><p>With Zenmuse L1 LiDAR payload</p></div>
-      </div>
-      <div class="g-item">
+    <div class="gallery-bento">
+      <div class="gb-item gb-1">
         <img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/2025-05-30_12-29-15.jpg" alt="Active construction survey" />
-        <div class="g-cap"><h3>Construction Survey</h3><p>Active construction site mapping</p></div>
+        <div class="gb-overlay"><div class="gb-cap">Construction Site Survey</div></div>
       </div>
-      <div class="g-item">
-        <img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/2025-05-30_13-54-21.jpg" alt="Residential development" />
-        <div class="g-cap"><h3>Residential Development</h3><p>Comprehensive aerial mapping</p></div>
+      <div class="gb-item gb-2">
+        <img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/PXL_20250528_213403577.MP.jpg" alt="DJI Matrice 300 RTK" />
+        <div class="gb-overlay"><div class="gb-cap">DJI Matrice 300 RTK</div></div>
       </div>
-      <div class="g-item">
-        <img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/PXL_20251108_134530354_MP.jpg" alt="DJI RC Plus Controller executing flight route" />
-        <div class="g-cap"><h3>Flight Planning & Execution</h3><p>DJI RC Plus with automated mission control</p></div>
+      <div class="gb-item gb-3">
+        <img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/2025-05-30_13-54-21.jpg" alt="Residential development mapping" />
+        <div class="gb-overlay"><div class="gb-cap">Residential Development</div></div>
       </div>
-      <div class="g-item">
-        <img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/drone_flight.gif" alt="Drone in flight during photogrammetry survey" />
-        <div class="g-cap"><h3>Photogrammetry Survey in Progress</h3><p>Automated flight path execution</p></div>
+      <div class="gb-item gb-4">
+        <img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/PXL_20251108_134530354_MP.jpg" alt="RC Plus flight planning" />
+        <div class="gb-overlay"><div class="gb-cap">DJI RC Plus — Mission Planning</div></div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-text">
-        <p class="sec-label">Who We Are</p>
-        <h2 class="sec-title">About Aerial Insights LLC</h2>
-        <p>Founded in 2025, Aerial Insights LLC provides precision LiDAR drone scanning services across New England. Our team combines deep LiDAR expertise with cutting-edge aerial technology to deliver unparalleled accuracy and efficiency.</p>
-        <p>We serve construction companies, surveying firms, engineering consultants, and real estate agencies. Our commitment to accuracy, safety, and innovation makes us the trusted partner for projects ranging from small residential developments to major infrastructure initiatives.</p>
-        <div class="badges">
-          <span class="badge">Licensed &amp; Insured</span>
-          <span class="badge">FAA Part 107 Certified</span>
-          <span class="badge">New England Based</span>
-          <span class="badge">Fast Turnaround</span>
-        </div>
-      </div>
-      <div class="about-panel">
-        <div class="a-stat"><div class="big">&lt;1cm</div><div class="lbl">Survey Accuracy</div></div>
-        <hr class="a-divider" />
-        <div class="a-stat"><div class="big">48hr</div><div class="lbl">Typical Turnaround</div></div>
-        <hr class="a-divider" />
-        <div class="a-stat"><div class="big">NE</div><div class="lbl">Service Area</div></div>
+      <div class="gb-item gb-5">
+        <img src="https://raw.githubusercontent.com/lostinacrowd2/aerialinsights2/main/aerialinsights-main/DJI_20250528152825_0044_Zenmuse-L1-mission_1750344602055.JPG" alt="Zenmuse L1 mission" />
+        <div class="gb-overlay"><div class="gb-cap">Zenmuse L1 LiDAR Mission</div></div>
       </div>
     </div>
   </div>
@@ -760,12 +1014,51 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="container">
-    <p class="sec-label">Get Started</p>
-    <h2 class="sec-title">Get Your Project Started</h2>
-    <p class="sec-desc">Contact us for a consultation and detailed project quote.</p>
-    <div class="contact-grid">
-      <div class="cf">
-        <h3>Request a Quote</h3>
+    <div class="sec-eyebrow">Get Started</div>
+    <h2 class="sec-title">Start Your Project</h2>
+    <div class="contact-wrap">
+      <div class="contact-info fade-up">
+        <p class="desc">Based in New England. Serving construction, surveying, and engineering firms across the region. FAA Part 107 certified, fully insured.</p>
+        <div class="ci-items">
+          <div class="ci-item">
+            <div class="ci-dot">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.9 12.85 19.79 19.79 0 0 1 1.83 4.18 2 2 0 0 1 3.82 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="ci-label">Phone</div>
+              <div class="ci-val">(603) 860-3890</div>
+            </div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-dot">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </div>
+            <div>
+              <div class="ci-label">Email</div>
+              <div class="ci-val"><a href="mailto:aaronmreyes@gmail.com" style="color:inherit;text-decoration:none;">info@aerialinsightsllc.net</a></div>
+            </div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-dot">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="ci-label">Service Area</div>
+              <div class="ci-val">New England Region</div>
+            </div>
+          </div>
+        </div>
+        <div class="why-items">
+          <div class="why-row">Licensed &amp; Insured Professionals</div>
+          <div class="why-row">FAA Part 107 Certified</div>
+          <div class="why-row">RTK-Corrected on Every Flight</div>
+          <div class="why-row">Same-Day to 48hr Turnaround</div>
+          <div class="why-row">CAD-Ready Deliverables</div>
+          <div class="why-row">No GCPs Required</div>
+        </div>
+      </div>
+      <div class="contact-form fade-up">
+        <div class="cf-title">Request a Quote</div>
         <form onsubmit="handleSubmit(event)">
           <div class="form-row">
             <div class="fg"><label>First Name *</label><input type="text" name="first_name" placeholder="John" required /></div>
@@ -785,39 +1078,13 @@
               <option>As-Built Documentation</option>
               <option>Boundary Survey</option>
               <option>Progress Monitoring</option>
+              <option>Environmental Mapping</option>
               <option>Other</option>
             </select>
           </div>
           <div class="fg"><label>Project Description</label><textarea name="project_description" placeholder="Tell us about your project requirements, location, and timeline..." rows="4"></textarea></div>
-          <button type="submit" class="btn btn-primary" style="width:100%;">Submit Request</button>
+          <button type="submit" class="submit-btn">Submit Request</button>
         </form>
-      </div>
-      <div class="ci">
-        <div class="ci-card">
-          <h3>Contact Information</h3>
-          <div class="ci-row">
-            <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.9 12.85 19.79 19.79 0 0 1 1.83 4.18 2 2 0 0 1 3.82 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-            <div><div class="ci-lbl">Phone</div><div class="ci-val">(603) 860-3890</div></div>
-          </div>
-          <div class="ci-row">
-            <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
-            <div><div class="ci-lbl">Email</div><div class="ci-val"><a href="mailto:aaronmreyes@gmail.com" style="color:inherit;text-decoration:none;">info@aerialinsightsllc.net</a></div></div>
-          </div>
-          <div class="ci-row">
-            <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
-            <div><div class="ci-lbl">Service Area</div><div class="ci-val">New England Region</div></div>
-          </div>
-        </div>
-        <div class="why-panel">
-          <h3>Why Choose Us?</h3>
-          <ul class="why-list">
-            <li>Licensed &amp; Insured Professionals</li>
-            <li>State-of-the-Art Equipment</li>
-            <li>Fast Turnaround Times</li>
-            <li>Competitive Pricing</li>
-            <li>CAD-Ready Deliverables</li>
-          </ul>
-        </div>
       </div>
     </div>
   </div>
@@ -825,121 +1092,91 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-grid">
+  <div class="footer-inner">
     <div>
-      <div class="f-logo">
-        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px;">
-          <ellipse cx="5.5" cy="6" rx="4.5" ry="1.2" stroke="#E8632A" stroke-width="1.2" fill="none"/>
-          <ellipse cx="22.5" cy="6" rx="4.5" ry="1.2" stroke="#E8632A" stroke-width="1.2" fill="none"/>
-          <line x1="5.5" y1="7.2" x2="5.5" y2="9" stroke="#777" stroke-width="1.2"/>
-          <line x1="22.5" y1="7.2" x2="22.5" y2="9" stroke="#777" stroke-width="1.2"/>
-          <line x1="5.5" y1="9" x2="11" y2="11" stroke="#E8632A" stroke-width="1.5"/>
-          <line x1="22.5" y1="9" x2="17" y2="11" stroke="#E8632A" stroke-width="1.5"/>
-          <rect x="10" y="9.5" width="8" height="5" rx="2" fill="#E8632A"/>
-          <line x1="10" y1="14.5" x2="8" y2="17.5" stroke="#777" stroke-width="1"/>
-          <line x1="18" y1="14.5" x2="20" y2="17.5" stroke="#777" stroke-width="1"/>
-          <line x1="7" y1="17.5" x2="9" y2="17.5" stroke="#777" stroke-width="1.2"/>
-          <line x1="19" y1="17.5" x2="21" y2="17.5" stroke="#777" stroke-width="1.2"/>
-          <rect x="12.5" y="14.5" width="3" height="2.5" rx="0.8" fill="#666"/>
-          <circle cx="14" cy="15.8" r="0.8" fill="#444"/>
-          <path d="M11 20 Q14 22 17 20" stroke="#4AACBC" stroke-width="1" fill="none"/>
-          <path d="M10 22.5 Q14 25.5 18 22.5" stroke="#4AACBC" stroke-width="0.9" fill="none" opacity="0.7"/>
-        </svg>
-        <span>Aerial Insights LLC</span>
-      </div>
-      <p>Precision LiDAR drone surveying for construction and surveying professionals across New England.</p>
-      <div class="f-social" style="display:flex;gap:0.75rem;margin-top:1rem;">
-        <a href="#" style="width:34px;height:34px;background:rgba(255,255,255,0.08);border-radius:6px;display:flex;align-items:center;justify-content:center;transition:background 0.2s;" onmouseover="this.style.background='var(--blue)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--gray);"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-        </a>
-        <a href="#" style="width:34px;height:34px;background:rgba(255,255,255,0.08);border-radius:6px;display:flex;align-items:center;justify-content:center;transition:background 0.2s;" onmouseover="this.style.background='var(--blue)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--gray);"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
-        </a>
-        <a href="#" style="width:34px;height:34px;background:rgba(255,255,255,0.08);border-radius:6px;display:flex;align-items:center;justify-content:center;transition:background 0.2s;" onmouseover="this.style.background='var(--blue)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--gray);"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-        </a>
-      </div>
+      <div class="f-brand"><span class="f-dot"></span>Aerial Insights LLC</div>
+      <p class="f-desc">Precision LiDAR and photogrammetry drone inspections with RTK-corrected flights for construction and surveying professionals across New England.</p>
     </div>
     <div class="f-col">
       <h4>Services</h4>
       <ul>
-        <li><a href="#services">LiDAR Topographic Survey</a></li>
-        <li><a href="#services">Photogrammetry &amp; 3D Models</a></li>
-        <li><a href="#services">Construction Monitoring</a></li>
+        <li><a href="#services">Topographic Mapping</a></li>
         <li><a href="#services">Volumetric Analysis</a></li>
-        <li><a href="#deliverables">Deliverables</a></li>
+        <li><a href="#services">As-Built Documentation</a></li>
+        <li><a href="#services">Progress Monitoring</a></li>
+        <li><a href="#services">Boundary Surveys</a></li>
       </ul>
     </div>
     <div class="f-col">
       <h4>Company</h4>
       <ul>
         <li><a href="#process">How It Works</a></li>
+        <li><a href="#industries">Industries</a></li>
         <li><a href="#technology">Technology</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#deliverables">Deliverables</a></li>
+        <li><a href="#contact">Get a Quote</a></li>
       </ul>
     </div>
   </div>
   <div class="f-bottom">
-    <span>© 2025 Aerial Insights LLC. All rights reserved.</span>
-    <span>Licensed Professionals · New England</span>
+    <span>© 2026 Aerial Insights LLC. All rights reserved.</span>
+    <span>FAA Part 107 Certified &nbsp;·&nbsp; Licensed &amp; Insured &nbsp;·&nbsp; New England</span>
   </div>
 </footer>
 
 <script>
+  const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
-    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 30);
+    nav.classList.toggle('scrolled', window.scrollY > 40);
   });
-  function toggleMenu() { document.getElementById('mobileNav').classList.toggle('open'); }
-  function closeMenu() { document.getElementById('mobileNav').classList.remove('open'); }
-  document.querySelectorAll('.app-split, .tech-grid, .g-item, .about-grid, .contact-grid, .sec-title, .sec-desc').forEach(el => el.classList.add('fade-in'));
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 80); obs.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
-  // Replace YOUR_FORM_ID below:
-  // 1. Go to https://formspree.io and sign in / create a free account
-  // 2. Click "New Form", set the email to aaronmreyes@gmail.com
-  // 3. Copy the form ID from the endpoint (e.g. "xpwzabcd") and paste it below
-  const FORMSPREE_ID = 'mqeyqdkq';
 
-  function handleSubmit(e) {
+  function toggleMenu() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobileNav').classList.remove('open');
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  const FORMSPREE_ID = 'xpwzabcd';
+  async function handleSubmit(e) {
     e.preventDefault();
-    const form = e.target;
-    const btn = form.querySelector('button[type="submit"]');
-    const origText = btn.textContent;
+    const btn = e.target.querySelector('.submit-btn');
+    const data = new FormData(e.target);
+    const body = {
+      first_name: data.get('first_name'),
+      last_name: data.get('last_name'),
+      company: data.get('company'),
+      email: data.get('email'),
+      phone: data.get('phone'),
+      project_type: data.get('project_type'),
+      project_description: data.get('project_description'),
+    };
     btn.textContent = 'Sending...';
     btn.disabled = true;
-
-    fetch('https://formspree.io/f/' + FORMSPREE_ID, {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(form)
-    })
-    .then(res => {
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(body),
+      });
       if (res.ok) {
-        btn.textContent = 'Request Submitted!';
-        btn.style.background = '#22c55e';
-        setTimeout(() => {
-          btn.textContent = origText;
-          btn.style.background = '';
-          btn.disabled = false;
-          form.reset();
-        }, 2500);
+        btn.textContent = 'Request Sent';
+        e.target.reset();
       } else {
-        return res.json().then(d => { throw new Error(d.error || 'Submission failed'); });
-      }
-    })
-    .catch(() => {
-      btn.textContent = 'Error — please email us directly';
-      btn.style.background = '#ef4444';
-      setTimeout(() => {
-        btn.textContent = origText;
-        btn.style.background = '';
+        btn.textContent = 'Error — Try Again';
         btn.disabled = false;
-      }, 3000);
-    });
+      }
+    } catch {
+      btn.textContent = 'Error — Try Again';
+      btn.disabled = false;
+    }
   }
 </script>
 </body>
