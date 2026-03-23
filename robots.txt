@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# (Optional) Uncomment and set your canonical sitemap URL:
-# Sitemap: https://www.your-domain.com/sitemap.xml
+Sitemap: https://www.aerialinsightsllc.net/sitemap.xml
